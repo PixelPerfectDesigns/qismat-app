@@ -1,0 +1,243 @@
+[
+    {
+      "type": "text",
+      "question": "What is your name?"
+    },
+    {
+        "type": "dropdown",
+        "question": "Gender?",
+        "options": [
+          "Male",
+          "Female"
+        ]
+      }, {
+        "type": "date_select",
+        "question": "Date of Birth?"
+      },
+    {
+        "type": "dropdown",
+        "question": "What is your ethnicity?",
+        "options": [
+          "Asian",
+          "Black or African American",
+          "Hispanic or Latino",
+          "White",
+          "Native American or Alaska Native",
+          "Other"
+        ]
+      },
+    
+      {
+        "type": "dropdown",
+        "question": "Which country are you located in?",
+        "options": [
+          "United States",
+          "Canada",
+          "United Kingdom",
+          "Australia",
+          "Germany",
+          "France",
+          "Spain",
+          "Italy",
+          "India",
+          "China",
+          "Japan",
+          "Brazil",
+          "Mexico",
+          "South Africa",
+          "Nigeria",
+          "Kenya",
+          "Egypt",
+          "Saudi Arabia",
+          "United Arab Emirates",
+          "Other"
+        ]
+      },
+
+    {
+      "type": "text",
+      "question": "Which city are you located in?"
+    },
+      {
+        "type": "dropdown",
+        "question": "Highest education level completed",
+        "options": [
+          "High School",
+          "Associate's Degree/College",
+          "Bachelor's Degree",
+          "Master's Degree",
+          "Doctorate",
+          "Other"
+        ]
+      },
+      {
+        "type": "dropdown",
+        "question": "What education level are you pursuing right now?",
+        "options": [
+          "High School",
+          "Associate's Degree",
+          "Bachelor's Degree",
+          "Master's Degree",
+          "Doctorate",
+          "Not pursuing education"
+        ]
+      },
+      {
+        "type": "dropdown",
+        "question": "Select your profession",
+        "options": [
+            "Accountant",
+            "Architect",
+            "Artist",
+            "Astronomer",
+            "Attorney",
+            "Biologist",
+            "Chef",
+            "Civil Engineer",
+            "Computer Programmer",
+            "Dentist",
+            "Doctor",
+            "Economist",
+            "Electrician",
+            "Fashion Designer",
+            "Firefighter",
+            "Graphic Designer",
+            "Journalist",
+            "Lecturer",
+            "Librarian",
+            "Mechanical Engineer",
+            "Nurse",
+            "Pharmacist",
+            "Photographer",
+            "Pilot",
+            "Police Officer",
+            "Psychologist",
+            "Research Scientist",
+            "Social Worker",
+            "Software Engineer",
+            "Teacher",
+            "Veterinarian",
+            "Web Developer",
+            "Writer",
+            "Other"
+        ]
+      },
+     
+      {
+        "type": "slider",
+        "question": "What is your current annual salary?",
+        "min": 20000,
+        "max": 200000
+      },
+      {
+        "type": "multi_select_dropdown",
+        "question": "What skills do you have?",
+        "options": [
+          "Programming",
+          "Graphic Design",
+          "Cooking",
+          "Public Speaking",
+          "Language Proficiency",
+          "Writing",
+          "Artistic Skills",
+          "Problem Solving",
+          "Leadership",
+          "Teamwork",
+          "Data Analysis",
+          "Digital Marketing",
+          "Photography",
+          "Video Editing",
+          "Mathematics",
+          "Customer Service",
+          "Research",
+          "Negotiation",
+          "Project Management",
+          "Sales",
+          "Singing",
+          "Gardening",
+          "Martial Arts",
+          "Woodworking",
+          "Craftsmanship",
+          "Event Planning",
+          "Time Management",
+          "Other"
+        ]
+      },
+      {
+        "type": "radio",
+        "question": "How many times have you been previously married?",
+        "options": ["Never married", "One previous marriage", "Two previous marriages", "Three or more previous marriages"]
+      },
+      {
+        "type": "text",
+        "question": "Where do you see yourself in 5 years?"
+      },
+      {
+        "type": "text",
+        "question": "What are your aspirations and goals?"
+      },
+      {
+        "type": "multi_select_dropdown",
+        "question": "What are your hobbies?",
+        "options": [
+          "Reading",
+          "Sports (e.g., tennis, swimming)",
+          "Traveling",
+          "Cooking",
+          "Art (e.g., painting, drawing)",
+          "Gardening",
+          "Gaming (e.g., video games)",
+          "Fitness (e.g., running, yoga)",
+          "Photography",
+          "Hiking",
+          "Crafts (e.g., knitting, woodworking)",
+          "Volunteering",
+          "Writing (e.g., blogging, poetry)",
+          "Collecting (e.g., stamps, coins)",
+          "Fishing",
+          "Camping",
+          "Martial Arts",
+          "Sculpting",
+          "Model Building",
+          "Other"
+        ]
+      },
+      {
+        "type": "multi_select_dropdown",
+        "question": "How would you describe your personality?",
+        "options": [
+          "Outgoing",
+          "Introverted",
+          "Adventurous",
+          "Easygoing",
+          "Optimistic",
+          "Analytical",
+          "Creative",
+          "Responsible",
+          "Empathetic",
+          "Confident",
+          "Spontaneous",
+          "Reserved",
+          "Detail-oriented",
+          "Ambitious",
+          "Social",
+          "Calm",
+          "Organized",
+          "Open-minded",
+          "Funny",
+          "Serious",
+          "Loyal",
+          "Independent",
+          "Other"
+        ]
+      }
+    ]
+      
+      
+      
+      
+
+
+      
+      
+      

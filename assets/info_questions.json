@@ -1,0 +1,28 @@
+[
+    {
+      "type": "text",
+      "question": "What is your name?"
+    },
+    {
+        "type": "dropdown",
+        "question": "Gender?",
+        "options": [
+          "Male",
+          "Female"
+        ]
+      }, {
+        "type": "date_select",
+        "question": "Date of Birth?"
+    }
+  ]   
+    
+    
+     
+
+     
+      
+
+
+      
+      
+      

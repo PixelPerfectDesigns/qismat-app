@@ -1,5 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:qismat/screens/google_signin.dart';
+import 'package:qismat/screens/facebook_signin.dart';
+import 'package:qismat/screens/dashboard.dart';
+import 'package:qismat/screens/profile_setup.dart';
+import 'package:qismat/screens/profilequestions2.dart';
 
 final _firebase = FirebaseAuth.instance;
 
@@ -29,12 +34,35 @@ class _AuthScreenState extends State<AuthScreen> {
     _form.currentState!.save();
 
     try {
+      final UserCredential userCredentials;
       if (_isLogin) {
-        final userCredentials = await _firebase.signInWithEmailAndPassword(
+        userCredentials = await _firebase.signInWithEmailAndPassword(
             email: _enteredEmail, password: _enteredPassword);
       } else {
-        final userCredentials = await _firebase.createUserWithEmailAndPassword(
+        userCredentials = await _firebase.createUserWithEmailAndPassword(
             email: _enteredEmail, password: _enteredPassword);
+      }
+      final User? user = userCredentials.user;
+      if (user != null) {
+        bool isProfileSetupComplete = await checkProfileSetupStatus(user.uid);
+
+        if (isProfileSetupComplete) {
+          // Profile setup is complete, navigate to the Dashboard screen
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => DashboardScreen(),
+            ),
+          );
+        } else {
+          // Profile setup is not complete, navigate to the Profile Questions screen
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => ProfileQuestionsScreen(),
+            ),
+          );
+        }
       }
     } on FirebaseAuthException catch (error) {
       if (error.code == 'email-already-in-use') {
@@ -69,7 +97,8 @@ class _AuthScreenState extends State<AuthScreen> {
                 child: Image.asset('assets/images/qismat-logo.png'),
               ),
               Card(
-                color: Colors.white,
+                elevation: 0,
+                color: Colors.transparent,
                 surfaceTintColor: Colors.transparent,
                 margin: const EdgeInsets.all(20),
                 child: SingleChildScrollView(
@@ -117,11 +146,10 @@ class _AuthScreenState extends State<AuthScreen> {
                           ElevatedButton(
                             onPressed: _submit,
                             style: ElevatedButton.styleFrom(
-                              backgroundColor: Theme.of(context)
-                                  .colorScheme
-                                  .primaryContainer,
+                              backgroundColor: Color(0xFFFF5858),
                             ),
-                            child: Text(_isLogin ? 'Login' : 'Signup'),
+                            child: Text(_isLogin ? 'Login' : 'Signup',
+                                style: TextStyle(color: Colors.white)),
                           ),
                           TextButton(
                             onPressed: () {
@@ -129,9 +157,12 @@ class _AuthScreenState extends State<AuthScreen> {
                                 _isLogin = !_isLogin;
                               });
                             },
-                            child: Text(_isLogin
-                                ? 'Create an account'
-                                : 'I already have an account'),
+                            child: Text(
+                              _isLogin
+                                  ? 'Create an account'
+                                  : 'I already have an account',
+                              style: TextStyle(color: Color(0xFFBAC1CE)),
+                            ),
                           ),
                         ],
                       ),
@@ -139,6 +170,40 @@ class _AuthScreenState extends State<AuthScreen> {
                   ),
                 ),
               ),
+              Text(
+                'Or continue with',
+                style: TextStyle(
+                  color: Color(0xFFBAC1CE),
+                  fontSize: 16,
+                  fontFamily: 'Inter',
+                  fontWeight: FontWeight.w400,
+                  height: 0.10,
+                ),
+              ),
+              Card(
+                elevation: 0,
+                color: Colors.transparent,
+                // surfaceTintColor: Colors.transparent,
+                child: SingleChildScrollView(
+                    child: Padding(
+                  padding: const EdgeInsets.all(20),
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.only(
+                            bottom: 16.0), // Add desired padding
+                        child: GoogleSignInButton(),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.only(
+                            bottom: 16.0), // Add desired padding
+                        child: FacebookSignInButton(),
+                      )
+                    ],
+                  ),
+                )),
+              )
             ],
           ),
         ),

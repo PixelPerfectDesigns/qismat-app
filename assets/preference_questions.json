@@ -1,0 +1,153 @@
+[
+    {
+        "type": "double_slider",
+        "question": "What age range would you like to get married to?",
+        "min": 18,
+        "max": 117
+      },
+
+      {
+        "type": "radio",
+        "question": "Where are you willing to relocate?",
+        "options": [
+          "Within my current city",
+          "Within my current country",
+          "Anywhere within my continent",
+          "Anywhere globally"
+        ]
+      },
+
+      {
+        "type": "checkboxes",
+        "question": "What live-in situation(s) are you okay with?",
+        "options": [
+          "Living alone with spouse",
+          "Joint-family but seperate quarters",
+          "Joint-family sharing living space"
+        ]
+      },
+      {
+        "type": "dropdown",
+        "question": "Preferred education level for a potential partner?",
+        "options": [
+          "High School",
+          "Associate's Degree",
+          "Bachelor's Degree",
+          "Master's Degree",
+          "Doctorate",
+          "No specific preference"
+        ]
+      },
+      {
+        "type": "multi_select_dropdown",
+        "question": "Preferred profession(s) for a potential partner",
+        "options": [
+          "Accountant",
+          "Architect",
+          "Artist",
+          "Astronomer",
+          "Attorney",
+          "Biologist",
+          "Chef",
+          "Civil Engineer",
+          "Computer Programmer",
+          "Dentist",
+          "Doctor",
+          "Economist",
+          "Electrician",
+          "Fashion Designer",
+          "Firefighter",
+          "Graphic Designer",
+          "Journalist",
+          "Lecturer",
+          "Librarian",
+          "Mechanical Engineer",
+          "Nurse",
+          "Pharmacist",
+          "Photographer",
+          "Pilot",
+          "Police Officer",
+          "Psychologist",
+          "Research Scientist",
+          "Social Worker",
+          "Software Engineer",
+          "Teacher",
+          "Veterinarian",
+          "Web Developer",
+          "Writer",
+          "Other"
+        ]
+      },
+      {
+        "type": "multi_select_dropdown",
+        "question": "Acceptable industries for a preferred partner",
+        "options": [
+          "Technology",
+          "Healthcare",
+          "Education",
+          "Finance",
+          "Engineering",
+          "Arts and Entertainment",
+          "Manufacturing",
+          "Hospitality and Tourism",
+          "Media and Communications",
+          "Science and Research",
+          "Nonprofit and Charity",
+          "Government and Public Service",
+          "Agriculture",
+          "Retail",
+          "Legal",
+          "Construction",
+          "Transportation and Logistics",
+          "Energy",
+          "Other"
+        ]
+      },
+      {
+        "type": "double_slider",
+        "question": "Preferred salary (annual) range in a partner",
+        "min": 20000,
+        "max": 200000
+      },
+      {
+        "type": "radio",
+        "question": "What is the employment arrangement in the relationship?",
+        "options": [
+          "Both partners are employed",
+          "Only the man is employed",
+          "Only the woman is employed"
+        ]
+      },
+      {
+        "type": "multi_select_dropdown",
+        "question": "What skills would you like your partner to have?",
+        "options": [
+          "Programming",
+          "Graphic Design",
+          "Cooking",
+          "Public Speaking",
+          "Language Proficiency",
+          "Writing",
+          "Artistic Skills",
+          "Problem Solving",
+          "Leadership",
+          "Teamwork",
+          "Other"
+        ]
+      },
+      {
+        "type": "radio",
+        "question": "How many kids would you like?",
+        "options": ["None", "1-2", "3-4", "5 or more"]
+      },
+      {
+        "type": "checkboxes",
+        "question": "What type of education system do you prefer for your children?",
+        "options": ["Homeschooling", "Public School", "Private School", "Online School", "Other"]
+      },
+      {
+        "type": "checkboxes",
+        "question": "Which types of individuals would you be open to considering for a relationship?",
+        "options": ["Divorcee", "Divorcee with kids", "Never Married"]
+      }
+    ]

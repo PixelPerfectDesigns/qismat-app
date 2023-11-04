@@ -12,7 +12,20 @@
           "package_name": "com.example.qismat"
         }
       },
-      "oauth_client": [],
+      "oauth_client": [
+        {
+          "client_id": "988696097583-00n360163jckvgko3nroeq80k6mauk0k.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.qismat",
+            "certificate_hash": "44a82f4ea6593d24f102962077836f9305649af6"
+          }
+        },
+        {
+          "client_id": "988696097583-949kb41tpmj88cik5ntmqa1tu9l0e60o.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
       "api_key": [
         {
           "current_key": "AIzaSyC0lDAJ6fDmWKtSC83ax4bv7egT1RFTpm4"
@@ -20,7 +33,19 @@
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": []
+          "other_platform_oauth_client": [
+            {
+              "client_id": "988696097583-949kb41tpmj88cik5ntmqa1tu9l0e60o.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "988696097583-3m5dk5rkii3o4rctokg19622ivl2tnsp.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.qismat.RunnerTests"
+              }
+            }
+          ]
         }
       }
     }
