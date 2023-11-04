@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "988696097583",
+    "project_id": "qismat-flutter-app",
+    "storage_bucket": "qismat-flutter-app.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:988696097583:android:f53965151fd982512b67da",
+        "android_client_info": {
+          "package_name": "com.example.qismat"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC0lDAJ6fDmWKtSC83ax4bv7egT1RFTpm4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
