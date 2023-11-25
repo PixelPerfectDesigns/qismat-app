@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 import 'package:qismat/screens/dashboard.dart';
-import 'package:qismat/screens/profilequestions2.dart';
+import 'package:qismat/screens/profile_questions.dart';
 import 'package:qismat/screens/profile_setup.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 

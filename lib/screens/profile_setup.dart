@@ -4,8 +4,11 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 Future<bool> checkProfileSetupStatus(String userUid) async {
   try {
     // Reference to the user's Firestore document
-    DocumentReference userDocRef =
-        FirebaseFirestore.instance.collection('users').doc(userUid);
+    DocumentReference userDocRef = FirebaseFirestore.instance
+        .collection('users')
+        .doc(userUid)
+        .collection('settings')
+        .doc('general');
 
     // Get the user's document using await
     DocumentSnapshot userSnapshot = await userDocRef.get();

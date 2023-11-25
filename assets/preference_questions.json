@@ -2,13 +2,26 @@
     {
         "type": "double_slider",
         "question": "What age range would you like to get married to?",
+        "field": "preferredAgeRange",
         "min": 18,
         "max": 117
+      },
+      {
+        "type": "checkboxes",
+        "question": "Which ethnicities would you be open to considering for a relationship?",
+        "field": "acceptableEthnicities",
+        "options": ["Asian",
+          "Black or African American",
+          "Hispanic or Latino",
+          "White",
+          "Native American or Alaska Native",
+          "Other"]
       },
 
       {
         "type": "radio",
         "question": "Where are you willing to relocate?",
+        "field": "relocationPreference",
         "options": [
           "Within my current city",
           "Within my current country",
@@ -16,10 +29,10 @@
           "Anywhere globally"
         ]
       },
-
       {
         "type": "checkboxes",
         "question": "What live-in situation(s) are you okay with?",
+        "field": "livingSituations",
         "options": [
           "Living alone with spouse",
           "Joint-family but seperate quarters",
@@ -29,6 +42,7 @@
       {
         "type": "dropdown",
         "question": "Preferred education level for a potential partner?",
+        "field": "educationLevelPreference",
         "options": [
           "High School",
           "Associate's Degree",
@@ -41,6 +55,7 @@
       {
         "type": "multi_select_dropdown",
         "question": "Preferred profession(s) for a potential partner",
+        "field": "preferredProfessions",
         "options": [
           "Accountant",
           "Architect",
@@ -81,6 +96,7 @@
       {
         "type": "multi_select_dropdown",
         "question": "Acceptable industries for a preferred partner",
+        "field": "acceptableIndustries",
         "options": [
           "Technology",
           "Healthcare",
@@ -106,12 +122,14 @@
       {
         "type": "double_slider",
         "question": "Preferred salary (annual) range in a partner",
+        "field": "preferredSalaryRange",
         "min": 20000,
         "max": 200000
       },
       {
         "type": "radio",
         "question": "What is the employment arrangement in the relationship?",
+        "field": "employmentArrangement",
         "options": [
           "Both partners are employed",
           "Only the man is employed",
@@ -121,6 +139,7 @@
       {
         "type": "multi_select_dropdown",
         "question": "What skills would you like your partner to have?",
+        "field": "partnerSkills",
         "options": [
           "Programming",
           "Graphic Design",
@@ -138,16 +157,19 @@
       {
         "type": "radio",
         "question": "How many kids would you like?",
+        "field": "desiredNumberOfKids",
         "options": ["None", "1-2", "3-4", "5 or more"]
       },
       {
         "type": "checkboxes",
         "question": "What type of education system do you prefer for your children?",
+        "field": "preferredEducationSystem",
         "options": ["Homeschooling", "Public School", "Private School", "Online School", "Other"]
       },
       {
         "type": "checkboxes",
         "question": "Which types of individuals would you be open to considering for a relationship?",
+        "field": "acceptableRelationshipTypes",
         "options": ["Divorcee", "Divorcee with kids", "Never Married"]
       }
     ]

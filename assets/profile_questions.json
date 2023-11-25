@@ -1,22 +1,28 @@
 [
     {
       "type": "text",
-      "question": "What is your name?"
+      "question": "What is your name?",
+      "field": "name"
+
     },
     {
         "type": "dropdown",
         "question": "Gender?",
+        "field": "gender",
         "options": [
           "Male",
           "Female"
         ]
       }, {
         "type": "date_select",
-        "question": "Date of Birth?"
+        "question": "Date of Birth?",
+        "field": "dateOfBirth"
+
       },
     {
         "type": "dropdown",
         "question": "What is your ethnicity?",
+        "field": "ethnicity",
         "options": [
           "Asian",
           "Black or African American",
@@ -30,6 +36,7 @@
       {
         "type": "dropdown",
         "question": "Which country are you located in?",
+        "field": "country",
         "options": [
           "United States",
           "Canada",
@@ -56,11 +63,13 @@
 
     {
       "type": "text",
-      "question": "Which city are you located in?"
+      "question": "Which city are you located in?",
+      "field":"city"
     },
       {
         "type": "dropdown",
         "question": "Highest education level completed",
+        "field":"educationLevel",
         "options": [
           "High School",
           "Associate's Degree/College",
@@ -73,6 +82,7 @@
       {
         "type": "dropdown",
         "question": "What education level are you pursuing right now?",
+        "field": "currentEducation",
         "options": [
           "High School",
           "Associate's Degree",
@@ -85,6 +95,7 @@
       {
         "type": "dropdown",
         "question": "Select your profession",
+        "field": "profession",
         "options": [
             "Accountant",
             "Architect",
@@ -126,12 +137,14 @@
       {
         "type": "slider",
         "question": "What is your current annual salary?",
+        "field": "currentSalary",
         "min": 20000,
         "max": 200000
       },
       {
         "type": "multi_select_dropdown",
         "question": "What skills do you have?",
+        "field": "skills",
         "options": [
           "Programming",
           "Graphic Design",
@@ -166,19 +179,24 @@
       {
         "type": "radio",
         "question": "How many times have you been previously married?",
+        "field": "previousMarriages",
         "options": ["Never married", "One previous marriage", "Two previous marriages", "Three or more previous marriages"]
       },
       {
         "type": "text",
-        "question": "Where do you see yourself in 5 years?"
+        "question": "Where do you see yourself in 5 years?",
+        "field": "futurePlans"
       },
       {
         "type": "text",
-        "question": "What are your aspirations and goals?"
+        "question": "What are your aspirations and goals?",
+        "field": "aspirationsAndGoals"
+
       },
       {
         "type": "multi_select_dropdown",
         "question": "What are your hobbies?",
+        "field": "hobbies",
         "options": [
           "Reading",
           "Sports (e.g., tennis, swimming)",
@@ -205,6 +223,7 @@
       {
         "type": "multi_select_dropdown",
         "question": "How would you describe your personality?",
+        "field": "personalityTraits",
         "options": [
           "Outgoing",
           "Introverted",

@@ -4,7 +4,7 @@ import 'package:qismat/screens/google_signin.dart';
 import 'package:qismat/screens/facebook_signin.dart';
 import 'package:qismat/screens/dashboard.dart';
 import 'package:qismat/screens/profile_setup.dart';
-import 'package:qismat/screens/profilequestions2.dart';
+import 'package:qismat/screens/profile_questions.dart';
 
 final _firebase = FirebaseAuth.instance;
 
