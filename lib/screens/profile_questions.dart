@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:qismat/screens/dashboard.dart';
-import 'package:qismat/screens/questions.dart';
+import 'package:qismat/screens/question.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'dart:convert';
 import 'package:flutter/services.dart' show rootBundle;
@@ -49,6 +49,7 @@ class _ProfileQuestionsScreenState extends State<ProfileQuestionsScreen> {
         onSave: saveResponse,
       ));
     }
+    print(profileQuestions.toString());
 
     for (var questionData in preferenceQuestions) {
       questionPages.add(QuestionPage(
@@ -58,10 +59,10 @@ class _ProfileQuestionsScreenState extends State<ProfileQuestionsScreen> {
     }
   }
 
-  void saveResponse(String question, dynamic response) {
+  void saveResponse(String question, String field, dynamic response) {
     // final userUid = _user.uid; // Add the user's UID here
 
-    userProfile[question] = response;
+    userProfile[field] = response;
     if (currentPage < questionPages.length - 1) {
       _pageController.nextPage(
         duration: Duration(milliseconds: 500),
@@ -99,9 +100,9 @@ class _ProfileQuestionsScreenState extends State<ProfileQuestionsScreen> {
     // });
   }
 
-  void savePreferences(String question, dynamic response) {
+  void savePreferences(String question, String field, dynamic response) {
     final userUid = _user.uid; // Add the user's UID here
-    userPreferences[question] = response;
+    userPreferences[field] = response;
 
     if (currentPage < questionPages.length - 1) {
       _pageController.nextPage(
@@ -148,37 +149,7 @@ class _ProfileQuestionsScreenState extends State<ProfileQuestionsScreen> {
       }).catchError((error) {
         print('Error setting up profile: $error');
       });
-      // FirebaseFirestore.instance
-      //     .collection('users')
-      //     .doc(userProfile['Gender?'])
-      //     .collection(userUid)
-      //     .doc('profile')
-      //     .set(userProfile)
-      //     .then((_) {
-      //   print('Profile saved to Firestore');
-      // }).catchError((error) {
-      //   print('Error saving profile responses: $error');
-      // });
-      // FirebaseFirestore.instance
-      //     .collection('users')
-      //     .doc(userProfile['Gender?'])
-      //     .collection(userUid)
-      //     .doc('preferences')
-      //     .set(userPreferences)
-      //     .then((_) {
-      //   print('Preferences saved to Firestore');
-      // }).catchError((error) {
-      //   print('Error saving preferences: $error');
-      // });
-      // // All questions are completed, set isProfileSetupComplete to true
-      // FirebaseFirestore.instance
-      //     .collection('users')
-      //     .doc(userProfile['Gender?'])
-      //     .collection(userUid)
-      //     .doc('settings')
-      //     .set({'isProfileSetupComplete': true}).then((_) {
-      //   print('Profile setup is complete.');
-      // });
+
       Navigator.push(
         context,
         MaterialPageRoute(

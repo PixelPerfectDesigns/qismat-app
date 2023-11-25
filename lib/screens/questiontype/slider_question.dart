@@ -1,16 +1,18 @@
 import 'package:flutter/material.dart';
 
 class SliderQuestionWidget extends StatefulWidget {
-  final Function(String, dynamic) onSave;
+  final Function(String, String, dynamic) onSave;
   final String question;
   final double minValue; // Add minValue property
   final double maxValue; // Add maxValue property
+  final String field;
 
   SliderQuestionWidget({
     required this.onSave,
     required this.question,
     required this.minValue,
     required this.maxValue,
+    required this.field,
   });
 
   @override
@@ -49,7 +51,7 @@ class _SliderQuestionWidgetState extends State<SliderQuestionWidget> {
           ),
           child: Text("Next", style: TextStyle(color: Colors.white)),
           onPressed: () {
-            widget.onSave(widget.question, _sliderValue);
+            widget.onSave(widget.question, widget.field, _sliderValue);
           },
         ),
       ],

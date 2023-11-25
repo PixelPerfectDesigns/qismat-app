@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
 
 class TextQuestionWidget extends StatefulWidget {
-  final Function(String, dynamic) onSave;
+  final Function(String, String, dynamic) onSave;
   final String question;
+  final String field;
 
   TextQuestionWidget({
     required this.onSave,
     required this.question,
+    required this.field,
   });
 
   @override
@@ -31,7 +33,7 @@ class _TextQuestionWidgetState extends State<TextQuestionWidget> {
             child: Text("Next", style: TextStyle(color: Colors.white)),
             onPressed: () {
               final answer = _textController.text;
-              widget.onSave(widget.question, answer);
+              widget.onSave(widget.question, widget.field, answer);
             }),
       ],
     );

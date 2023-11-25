@@ -2,14 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:multi_select_flutter/multi_select_flutter.dart';
 
 class MultiSelectDropdownQuestionWidget extends StatefulWidget {
-  final Function(String, dynamic) onSave;
+  final Function(String, String, dynamic) onSave;
   final String question;
   final List<String> options;
+  final String field;
 
   MultiSelectDropdownQuestionWidget({
     required this.onSave,
     required this.question,
     required this.options,
+    required this.field,
   });
 
   @override
@@ -44,7 +46,7 @@ class _MultiSelectDropdownQuestionWidgetState
             ),
             child: Text("Next", style: TextStyle(color: Colors.white)),
             onPressed: () {
-              widget.onSave(widget.question, selectedOptions);
+              widget.onSave(widget.question, widget.field, selectedOptions);
             },
           ),
         ),

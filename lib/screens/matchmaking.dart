@@ -54,8 +54,8 @@ Future<String?> getUserGender(String userId, DocumentReference userDoc) async {
       Map<String, dynamic> userProfile =
           documentSnapshot.data() as Map<String, dynamic>;
 
-      if (userProfile.containsKey("Gender?")) {
-        String userGender = userProfile["Gender?"];
+      if (userProfile.containsKey("gender")) {
+        String userGender = userProfile["gender"];
         print('User with ID $userId has gender: $userGender');
         return userGender;
       } else {
@@ -96,7 +96,7 @@ Future<List<Map<String, dynamic>>> retrieveOppositeGenderProfile(
         Map<String, dynamic>? profileData =
             profileSnapshot.data() as Map<String, dynamic>?;
 
-        if (profileData?['Gender?'] == oppositeGender) {
+        if (profileData?['gender'] == oppositeGender) {
           oppositeGenderProfile.add(profileData!);
         }
       }
@@ -120,7 +120,7 @@ Future<List<Map<String, dynamic>>> retrieveOppositeGenderPreferences(
         .collection('users')
         .doc(userUid)
         .collection('user_info')
-        .where('profile.Gender?', isEqualTo: oppositeGender)
+        .where('profile.gender', isEqualTo: oppositeGender)
         .get();
 
     print("Query result size: ${querySnapshot.size}");

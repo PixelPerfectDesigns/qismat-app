@@ -1,14 +1,16 @@
 import 'package:flutter/material.dart';
 
 class CheckboxesQuestionWidget extends StatefulWidget {
-  final Function(String, dynamic) onSave;
+  final Function(String, String, dynamic) onSave;
   final String question;
   final List<String> options;
+  final String field;
 
   CheckboxesQuestionWidget({
     required this.onSave,
     required this.question,
     required this.options,
+    required this.field,
   });
 
   @override
@@ -54,7 +56,7 @@ class _CheckboxesQuestionWidgetState extends State<CheckboxesQuestionWidget> {
                   selectedValues.add(widget.options[i]);
                 }
               }
-              widget.onSave(widget.question, selectedValues);
+              widget.onSave(widget.question, widget.field, selectedValues);
             },
             style: ElevatedButton.styleFrom(
               backgroundColor: Color(0xFFFF5858),

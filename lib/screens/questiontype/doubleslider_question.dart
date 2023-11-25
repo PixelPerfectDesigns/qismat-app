@@ -1,16 +1,18 @@
 import 'package:flutter/material.dart';
 
 class DoubleSliderQuestionWidget extends StatefulWidget {
-  final Function(String, dynamic) onSave;
+  final Function(String, String, dynamic) onSave;
   final String question;
   final double minValue; // Add minValue property
   final double maxValue; // Add maxValue property
+  final String field;
 
   DoubleSliderQuestionWidget({
     required this.onSave,
     required this.question,
     required this.minValue,
     required this.maxValue,
+    required this.field,
   });
 
   @override
@@ -61,7 +63,7 @@ class _DoubleSliderQuestionWidgetState
         Text("Max: ${_maxSliderValue.toStringAsFixed(0)}"),
         ElevatedButton(
             onPressed: () {
-              widget.onSave(widget.question,
+              widget.onSave(widget.question, widget.field,
                   {"min": _minSliderValue, "max": _maxSliderValue});
             },
             style: ElevatedButton.styleFrom(

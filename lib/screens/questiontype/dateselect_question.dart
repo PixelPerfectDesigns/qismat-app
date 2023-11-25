@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
 
 class DateSelectionQuestionWidget extends StatefulWidget {
-  final Function(String, DateTime) onSave;
+  final Function(String, String, dynamic) onSave;
   final String question;
+  final String field;
 
   DateSelectionQuestionWidget({
     required this.onSave,
     required this.question,
+    required this.field,
   });
 
   @override
@@ -61,7 +63,7 @@ class _DateSelectionQuestionWidgetState
         ElevatedButton(
             onPressed: () {
               if (selectedDate != null) {
-                widget.onSave(widget.question, selectedDate!);
+                widget.onSave(widget.question, widget.field, selectedDate!);
               } else {
                 // Handle the case where no date is selected
               }

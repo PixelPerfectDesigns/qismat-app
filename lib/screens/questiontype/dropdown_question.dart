@@ -1,14 +1,16 @@
 import 'package:flutter/material.dart';
 
 class DropdownQuestionWidget extends StatefulWidget {
-  final Function(String, dynamic) onSave;
+  final Function(String, String, dynamic) onSave;
   final String question;
   final List<String> options;
+  final String field;
 
   DropdownQuestionWidget({
     required this.onSave,
     required this.question,
     required this.options,
+    required this.field,
   });
 
   @override
@@ -38,7 +40,7 @@ class _DropdownQuestionWidgetState extends State<DropdownQuestionWidget> {
         ),
         ElevatedButton(
             onPressed: () {
-              widget.onSave(widget.question, selectedOption);
+              widget.onSave(widget.question, widget.field, selectedOption);
             },
             style: ElevatedButton.styleFrom(
               backgroundColor: Color(0xFFFF5858),
