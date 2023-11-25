@@ -1,21 +1,25 @@
 import 'package:flutter/material.dart';
 
 class User {
-  UserProfile profile;
-  UserPreferences preferences;
+  UserProfile? profile;
+  UserPreferences? preferences;
 
-  User({required this.profile, required this.preferences});
+  User({this.profile, this.preferences});
 
   factory User.fromMap(Map<String, dynamic> map) {
     return User(
-        profile: UserProfile.fromMap(map['profile']),
-        preferences: UserPreferences.fromMap(map['preferences']));
+      profile:
+          map['profile'] != null ? UserProfile.fromMap(map['profile']) : null,
+      preferences: map['preferences'] != null
+          ? UserPreferences.fromMap(map['preferences'])
+          : null,
+    );
   }
 
   Map<String, dynamic> toMap() {
     return {
-      'profile': profile.toMap(),
-      'preferences': preferences.toMap(),
+      'profile': profile?.toMap(),
+      'preferences': preferences?.toMap(),
     };
   }
 }
