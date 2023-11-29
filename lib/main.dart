@@ -6,6 +6,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:qismat/screens/dashboard.dart';
 import 'package:qismat/screens/google_signin.dart';
 import 'package:qismat/screens/test_users.dart';
+import 'package:qismat/screens/splash.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -28,14 +29,7 @@ class App extends StatelessWidget {
         useMaterial3: true,
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.white),
       ),
-      home: StreamBuilder(
-          stream: FirebaseAuth.instance.authStateChanges(),
-          builder: (ctx, snapshot) {
-            if (snapshot.hasData) {
-              return AuthScreen();
-            }
-            return const AuthScreen();
-          }),
+      home: const SplashScreen(), // Display the splash screen initially
     );
   }
 }

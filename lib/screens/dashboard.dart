@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:qismat/screens/matchmaking.dart';
 import 'package:qismat/screens/person.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:qismat/screens/auth.dart';
 
 class DashboardScreen extends StatefulWidget {
   const DashboardScreen({Key? key}) : super(key: key);
@@ -34,6 +36,26 @@ class _DashboardScreenState extends State<DashboardScreen> {
             icon: Icon(Icons.filter_list),
             onPressed: () {
               // Add filtering functionality
+            },
+          ),
+          PopupMenuButton<String>(
+            color: Colors.white,
+            itemBuilder: (BuildContext context) {
+              return {'Logout'}.map((String choice) {
+                return PopupMenuItem<String>(
+                  value: choice,
+                  child: Text(choice),
+                );
+              }).toList();
+            },
+            onSelected: (String choice) {
+              if (choice == 'Logout') {
+                FirebaseAuth.instance.signOut();
+                Navigator.of(context).pop(); // Close the current screen
+                Navigator.of(context).pushReplacement(
+                  MaterialPageRoute(builder: (context) => const AuthScreen()),
+                );
+              }
             },
           ),
         ],
@@ -215,7 +237,12 @@ class UserPage extends StatelessWidget {
           PopupMenuButton<String>(
             color: Colors.white,
             itemBuilder: (BuildContext context) {
-              return {'Request Picture'}.map((String choice) {
+              return [
+                'Request Picture',
+                'Request Contact Info',
+                'Save to Favorites',
+                'Logout'
+              ].map((String choice) {
                 return PopupMenuItem<String>(
                   value: choice,
                   child: Text(choice),
@@ -223,10 +250,23 @@ class UserPage extends StatelessWidget {
               }).toList();
             },
             onSelected: (String choice) {
-              if (choice == 'Request Picture') {
-                // Implement your logic to handle picture request
-                // For example, show a dialog or perform an action
-                // when the user selects 'Request Picture'
+              switch (choice) {
+                case 'Request Picture':
+                  // Implement your logic for 'Request Picture'
+                  break;
+                case 'Request Contact Info':
+                  break;
+                case 'Save to Favorites':
+                  break;
+                case 'Logout':
+                  FirebaseAuth.instance.signOut();
+                  Navigator.of(context).pop(); // Close the current screen
+                  Navigator.of(context).pushReplacement(
+                    MaterialPageRoute(builder: (context) => const AuthScreen()),
+                  );
+                  // Implement your logic for 'Option 3'
+                  break;
+                // Add more cases for additional options
               }
             },
           ),
