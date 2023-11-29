@@ -307,8 +307,7 @@ class UserPage extends StatelessWidget {
               ),
               SizedBox(height: 8.0),
               Text(
-                // user.profile?.aboutMe ??
-                'No information available',
+                user.profile?.about ?? 'No information available',
                 style: TextStyle(fontSize: 16.0),
                 textAlign: TextAlign.center,
               ),
@@ -395,8 +394,11 @@ class ProfileAttribute extends StatelessWidget {
   final String value;
   final IconData icon;
 
-  ProfileAttribute(
-      {required this.label, required this.value, required this.icon});
+  ProfileAttribute({
+    required this.label,
+    required this.value,
+    required this.icon,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -407,21 +409,24 @@ class ProfileAttribute extends StatelessWidget {
         children: [
           Icon(
             icon,
-            color: Color(0xFFFF5858), // Customize the icon color as needed
+            color: Color(0xFFFF5858),
           ),
           SizedBox(width: 8.0),
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                '$label: ',
-                style: TextStyle(fontWeight: FontWeight.bold),
-              ),
-              Text(
-                value,
-                style: TextStyle(fontSize: 16.0),
-              ),
-            ],
+          // Wrap the Column with Expanded
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  '$label: ',
+                  style: TextStyle(fontWeight: FontWeight.bold),
+                ),
+                Text(
+                  value,
+                  style: TextStyle(fontSize: 16.0),
+                ),
+              ],
+            ),
           ),
         ],
       ),

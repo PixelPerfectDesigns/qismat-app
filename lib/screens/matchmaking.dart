@@ -86,16 +86,17 @@ double calculateMatchPercentage(Person user1, Person user2) {
 
     matchingAttributes++;
   }
-  // if (person1Preferences.desiredSkills.contains(person2Profile.skills)) {
-  //   print('matchinfattributes-skills: $matchingAttributes');
+  if (person1Preferences.partnerSkills.contains(person2Profile.skills)) {
+    print('matchinfattributes-skills: $matchingAttributes');
 
-  //   matchingAttributes++;
-  // }
-  // if (person1Preferences.desiredPersonalityTraits.contains(person2Profile.personalityTraits)) {
-  //   print('matchinfattributes-skills: $matchingAttributes');
+    matchingAttributes++;
+  }
+  if (person1Preferences.desiredPersonalityTraits
+      .contains(person2Profile.personalityTraits)) {
+    print('matchinfattributes-personality: $matchingAttributes');
 
-  //   matchingAttributes++;
-  // }
+    matchingAttributes++;
+  }
   if (person1Preferences.preferredProfessions
       .contains(person2Profile.profession)) {
     print('matchinfattributes-profession: $matchingAttributes');
@@ -115,16 +116,12 @@ double calculateMatchPercentage(Person user1, Person user2) {
 }
 
 Future<Person> createCurrentUser(String userUid) async {
-  print('reached here');
-
   Map<String, dynamic> profileMap = await retrieveCurrentUserProfile(userUid);
   PersonProfile profile = PersonProfile.fromMap(profileMap);
 
   Map<String, dynamic> preferencesMap =
       await retrieveCurrentUserPreferences(userUid);
-  print('created preferencesMap ');
   PersonPreferences preferences = PersonPreferences.fromMap(preferencesMap);
-  print('created preferencesPerson ');
 
   return Person(
     userUid: userUid,
@@ -139,6 +136,8 @@ Future<Person> createMatchingUser(String userUid) async {
 
   Map<String, dynamic> preferencesMap =
       await retrieveUserDoc(userUid, 'preferences');
+  print(preferencesMap.toString());
+
   PersonPreferences preferences = PersonPreferences.fromMap(preferencesMap);
 
   return Person(
@@ -168,13 +167,11 @@ Future<List<Person>> filterMatches() async {
           await retrieveOppositeGenderDoc(userUid, userGender);
       List<Person> filteredMatches = [];
 
-      print('done retrieving oppositegenderdoc');
-
       for (Person matchingUser in oppositeGenderProfiles) {
         double matchingPercentage =
             calculateMatchPercentage(currentUser, matchingUser);
         print(matchingPercentage);
-        if (matchingPercentage >= 50) {
+        if (matchingPercentage >= 60) {
           print(matchingUser.userUid);
           filteredMatches.add(matchingUser);
         }
@@ -238,11 +235,10 @@ Future<Map<String, dynamic>> retrieveUserDoc(
         .get();
 
     if (profileSnapshot.exists) {
+      print(docid);
       Map<String, dynamic>? profileData =
           profileSnapshot.data() as Map<String, dynamic>?;
       if (profileData != null) {
-        print(profileData.toString());
-
         return profileData;
       }
     }
@@ -278,9 +274,10 @@ Future<List<Person>> retrieveOppositeGenderDoc(
       //   // Check the gender and add to the list if it's the opposite gender
       //   Map<String, dynamic>? profileData =
       //       profileSnapshot.data() as Map<String, dynamic>?;
-
+      print(doc.id);
       Map<String, dynamic>? profileData =
           await retrieveUserDoc(doc.id, 'profile');
+      // print(profileData.toString());
 
       // if (profileData?['gender'] == oppositeGender) {
       //   oppositeGenderProfile.add(profileData!);
@@ -288,13 +285,13 @@ Future<List<Person>> retrieveOppositeGenderDoc(
       // }
 
       if (profileData?['gender'] == oppositeGender) {
-        print(doc.id);
+        print(profileData?['gender']);
         Person matchingUser = await createMatchingUser(doc.id);
         oppositeGenderProfile.add(matchingUser);
+        print(oppositeGenderProfile.length);
       }
       // }
     }
-    print(oppositeGenderProfile.toString());
     return oppositeGenderProfile;
   } catch (error) {
     print('Error retrieving opposite gender preferences: $error');
@@ -313,13 +310,10 @@ Future<List<Person>> retrieveOppositeGenderDoc(
 // }
 
 Future<Map<String, dynamic>> retrieveCurrentUserPreferences(String userUid) {
-  print('retrieving current user preferences ');
-
   return retrieveUserDoc(userUid, 'preferences');
 }
 
 Future<Map<String, dynamic>> retrieveCurrentUserProfile(String userUid) {
-  print('retrieving current user profile ');
   return retrieveUserDoc(userUid, 'profile');
 }
 
