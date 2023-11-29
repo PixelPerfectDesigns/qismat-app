@@ -43,25 +43,33 @@ class _CheckboxesQuestionWidgetState extends State<CheckboxesQuestionWidget> {
                     selectedOptions[i] = value!;
                   });
                 },
+                activeColor: Color(0xFFFF5858),
               ),
               Text(widget.options[i]),
             ],
           ),
         ],
-        ElevatedButton(
-            onPressed: () {
-              final selectedValues = <String>[];
-              for (int i = 0; i < widget.options.length; i++) {
-                if (selectedOptions[i]) {
-                  selectedValues.add(widget.options[i]);
-                }
-              }
-              widget.onSave(widget.question, widget.field, selectedValues);
-            },
-            style: ElevatedButton.styleFrom(
-              backgroundColor: Color(0xFFFF5858),
-            ),
-            child: Text("Next", style: TextStyle(color: Colors.white))),
+        SizedBox(height: 8.0),
+        Center(
+            child: ElevatedButton(
+                onPressed: () {
+                  final selectedValues = <String>[];
+                  for (int i = 0; i < widget.options.length; i++) {
+                    if (selectedOptions[i]) {
+                      selectedValues.add(widget.options[i]);
+                    }
+                  }
+                  widget.onSave(widget.question, widget.field, selectedValues);
+                },
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: Color(0xFFFF5858),
+                ),
+                child: Text("Next",
+                    style: TextStyle(
+                        color: Colors
+                            .white)))) // Add some spacing between checkboxes and the button
+
+        ,
       ],
     );
   }

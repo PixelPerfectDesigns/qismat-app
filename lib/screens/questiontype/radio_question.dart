@@ -35,9 +35,11 @@ class _RadioQuestionWidgetState extends State<RadioQuestionWidget> {
                   _selectedOption = value;
                 });
               },
+              activeColor: Color(0xFFFF5858),
             );
           }).toList(),
         ),
+        SizedBox(height: 16),
         ElevatedButton(
           style: ElevatedButton.styleFrom(
             backgroundColor: Color(0xFFFF5858),

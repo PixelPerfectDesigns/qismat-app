@@ -38,6 +38,7 @@ class _SliderQuestionWidgetState extends State<SliderQuestionWidget> {
           min: widget.minValue,
           max: widget.maxValue,
           activeColor: Color(0xFFFF5858),
+          inactiveColor: Color(0xFFFFE1E1),
           onChanged: (value) {
             setState(() {
               _sliderValue = value;
@@ -45,6 +46,9 @@ class _SliderQuestionWidgetState extends State<SliderQuestionWidget> {
           },
         ),
         Text("${_sliderValue.toStringAsFixed(0)}"),
+        SizedBox(
+          height: 16,
+        ),
         ElevatedButton(
           style: ElevatedButton.styleFrom(
             backgroundColor: Color(0xFFFF5858),

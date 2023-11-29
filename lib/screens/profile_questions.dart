@@ -100,7 +100,8 @@ class _ProfileQuestionsScreenState extends State<ProfileQuestionsScreen> {
     // });
   }
 
-  void savePreferences(String question, String field, dynamic response) {
+  Future<void> savePreferences(
+      String question, String field, dynamic response) async {
     final userUid = _user.uid; // Add the user's UID here
     userPreferences[field] = response;
 
@@ -113,7 +114,7 @@ class _ProfileQuestionsScreenState extends State<ProfileQuestionsScreen> {
         currentPage++;
       });
     } else {
-      FirebaseFirestore.instance
+      await FirebaseFirestore.instance
           .collection('users')
           .doc(userUid)
           .set({}, SetOptions(merge: true))
@@ -129,7 +130,7 @@ class _ProfileQuestionsScreenState extends State<ProfileQuestionsScreen> {
           .then((_) => print('Profile saved to Firestore'))
           .catchError((error) => print('Error: $error'));
 
-      FirebaseFirestore.instance
+      await FirebaseFirestore.instance
           .collection('users')
           .doc(userUid)
           .collection('user_info')
@@ -139,12 +140,15 @@ class _ProfileQuestionsScreenState extends State<ProfileQuestionsScreen> {
         print('Preferences saved to Firestore');
       });
       // All questions are completed, set isProfileSetupComplete to true
-      FirebaseFirestore.instance
+      await FirebaseFirestore.instance
           .collection('users')
           .doc(userUid)
           .collection('settings')
           .doc("general")
-          .set({'isProfileSetupComplete': true}).then((_) {
+          .set({
+        'isProfileSetupComplete': true,
+        'hideProfilePicture': true
+      }).then((_) {
         print('Profile setup is complete.');
       }).catchError((error) {
         print('Error setting up profile: $error');
@@ -162,7 +166,11 @@ class _ProfileQuestionsScreenState extends State<ProfileQuestionsScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text("Profile Questions")),
+      appBar: AppBar(
+        title: Text('Profile Questions', style: TextStyle(color: Colors.white)),
+        backgroundColor: Color(0xFFFF5858),
+        iconTheme: IconThemeData(color: Colors.white),
+      ),
       body: PageView(
         controller: _pageController,
         children: questionPages,

@@ -37,6 +37,11 @@ class _MultiSelectDropdownQuestionWidgetState
               selectedOptions = values;
             });
           },
+          selectedItemsTextStyle: TextStyle(color: Colors.black),
+          backgroundColor: Color(0xFFFFDEDE),
+          unselectedColor: Colors.white,
+          selectedColor: Color(0xFF7A7A),
+          checkColor: Color(0xFFFF5858),
         ),
         Padding(
           padding: const EdgeInsets.only(top: 16.0),

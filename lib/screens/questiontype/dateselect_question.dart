@@ -60,6 +60,7 @@ class _DateSelectionQuestionWidgetState
               "${selectedDate?.toLocal()}".split(' ')[0] ?? 'Select a date',
               style: TextStyle(color: Colors.white)),
         ),
+        SizedBox(height: 16),
         ElevatedButton(
             onPressed: () {
               if (selectedDate != null) {

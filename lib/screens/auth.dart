@@ -110,9 +110,24 @@ class _AuthScreenState extends State<AuthScreen> {
                         mainAxisSize: MainAxisSize.min,
                         children: [
                           TextFormField(
-                            decoration: const InputDecoration(
-                                labelText: 'Email Address'),
+                            decoration: InputDecoration(
+                              labelText: 'Email Address',
+                              labelStyle: TextStyle(
+                                  color: Color(
+                                      0xFFFF5858)), // Set the color of the email address string
+                              focusedBorder: UnderlineInputBorder(
+                                borderSide: BorderSide(
+                                    color: Color(
+                                        0xFFFF5858)), // Set the color of the focused text box border
+                              ),
+                              enabledBorder: UnderlineInputBorder(
+                                borderSide: BorderSide(
+                                    color: Color(
+                                        0xFFFF5858)), // Set the color of the enabled (idle) text box border
+                              ),
+                            ),
                             keyboardType: TextInputType.emailAddress,
+                            cursorColor: Color(0xFFFF5858),
                             autocorrect: false,
                             textCapitalization: TextCapitalization.none,
                             validator: (value) {
@@ -129,9 +144,26 @@ class _AuthScreenState extends State<AuthScreen> {
                             },
                           ),
                           TextFormField(
-                            decoration:
-                                const InputDecoration(labelText: 'Password'),
+                            decoration: InputDecoration(
+                              labelText: 'Password',
+                              labelStyle: TextStyle(
+                                  color: Color(
+                                      0xFFFF5858)), // Set the color of the email address string
+                              focusedBorder: UnderlineInputBorder(
+                                borderSide: BorderSide(
+                                    color: Color(
+                                        0xFFFF5858)), // Set the color of the focused text box border
+                              ),
+                              enabledBorder: UnderlineInputBorder(
+                                borderSide: BorderSide(
+                                    color: Color(
+                                        0xFFFF5858)), // Set the color of the enabled (idle) text box border
+                              ),
+                            ),
                             obscureText: true,
+                            cursorColor: Color(
+                                0xFFFF5858), // Set the color of the flashing cursor
+
                             validator: (value) {
                               if (value == null || value.trim().length < 6) {
                                 return 'Password must be at least 6 characters long.';
@@ -151,19 +183,28 @@ class _AuthScreenState extends State<AuthScreen> {
                             child: Text(_isLogin ? 'Login' : 'Signup',
                                 style: TextStyle(color: Colors.white)),
                           ),
-                          TextButton(
-                            onPressed: () {
+                          InkWell(
+                            onTap: () {
                               setState(() {
                                 _isLogin = !_isLogin;
                               });
                             },
-                            child: Text(
-                              _isLogin
-                                  ? 'Create an account'
-                                  : 'I already have an account',
-                              style: TextStyle(color: Color(0xFFBAC1CE)),
+                            borderRadius: BorderRadius.circular(
+                                30.0), // Set to your desired border radius
+
+                            child: TextButton(
+                              onPressed: null, // or set to your logic
+                              style: TextButton.styleFrom(
+                                foregroundColor:
+                                    Color(0xFFBAC1CE), // Text color
+                              ),
+                              child: Text(
+                                _isLogin
+                                    ? 'Create an account'
+                                    : 'I already have an account',
+                              ),
                             ),
-                          ),
+                          )
                         ],
                       ),
                     ),

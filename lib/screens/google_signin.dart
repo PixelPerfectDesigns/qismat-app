@@ -63,7 +63,8 @@ class GoogleSignInButton extends StatelessWidget {
             Border.all(color: Color(0xFFFF5858), width: 2.0), // Border style
         borderRadius: BorderRadius.circular(30), // Border radius
       ),
-      padding: EdgeInsets.all(5.0), // Adjust padding as needed
+      padding: EdgeInsets.symmetric(
+          vertical: 5.0, horizontal: 13), // Adjust padding as needed
       child: ElevatedButton.icon(
         onPressed: () async {
           await _handleGoogleSignIn(context);

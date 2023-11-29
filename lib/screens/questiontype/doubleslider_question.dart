@@ -42,6 +42,7 @@ class _DoubleSliderQuestionWidgetState
           min: widget.minValue,
           max: widget.maxValue,
           activeColor: Color(0xFFFF5858),
+          inactiveColor: Color(0xFFFFE1E1),
           onChanged: (value) {
             setState(() {
               _minSliderValue = value;
@@ -54,6 +55,7 @@ class _DoubleSliderQuestionWidgetState
           min: widget.minValue,
           max: widget.maxValue,
           activeColor: Color(0xFFFF5858),
+          inactiveColor: Color(0xFFFFE1E1),
           onChanged: (value) {
             setState(() {
               _maxSliderValue = value;
@@ -61,6 +63,7 @@ class _DoubleSliderQuestionWidgetState
           },
         ),
         Text("Max: ${_maxSliderValue.toStringAsFixed(0)}"),
+        SizedBox(height: 16),
         ElevatedButton(
             onPressed: () {
               widget.onSave(widget.question, widget.field,

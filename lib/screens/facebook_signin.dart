@@ -65,7 +65,7 @@ class FacebookSignInButton extends StatelessWidget {
             Border.all(color: Color(0xFFFF5858), width: 2.0), // Border style
         borderRadius: BorderRadius.circular(30), // Border radius
       ),
-      padding: EdgeInsets.all(5.0), // Adjust padding as needed
+      padding: EdgeInsets.symmetric(vertical: 5.0, horizontal: 5),
       child: ElevatedButton.icon(
         onPressed: () async {
           await _handleFacebookSignIn(context);

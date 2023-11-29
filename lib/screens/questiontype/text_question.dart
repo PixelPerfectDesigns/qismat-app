@@ -24,8 +24,24 @@ class _TextQuestionWidgetState extends State<TextQuestionWidget> {
       children: [
         TextField(
           controller: _textController,
-          decoration: InputDecoration(labelText: 'Your Answer'),
+          decoration: InputDecoration(
+            labelStyle: TextStyle(
+                color: Color(
+                    0xFFFF5858)), // Set the color of the email address string
+            focusedBorder: UnderlineInputBorder(
+              borderSide: BorderSide(
+                  color: Color(
+                      0xFFFF5858)), // Set the color of the focused text box border
+            ),
+            enabledBorder: UnderlineInputBorder(
+              borderSide: BorderSide(
+                  color: Color(
+                      0xFFFF5858)), // Set the color of the enabled (idle) text box border
+            ),
+          ),
+          cursorColor: Color(0xFFFF5858),
         ),
+        SizedBox(height: 16),
         ElevatedButton(
             style: ElevatedButton.styleFrom(
               backgroundColor: Color(0xFFFF5858),

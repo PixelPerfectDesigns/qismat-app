@@ -1,48 +1,52 @@
-import 'package:flutter/material.dart';
+class Person {
+  String? userUid;
+  PersonProfile? profile;
+  PersonPreferences? preferences;
 
-class User {
-  UserProfile? profile;
-  UserPreferences? preferences;
+  Person({this.userUid, this.profile, this.preferences});
 
-  User({this.profile, this.preferences});
-
-  factory User.fromMap(Map<String, dynamic> map) {
-    return User(
+  factory Person.fromMap(Map<String, dynamic> map) {
+    return Person(
+      userUid: map['userUid'],
       profile:
-          map['profile'] != null ? UserProfile.fromMap(map['profile']) : null,
+          map['profile'] != null ? PersonProfile.fromMap(map['profile']) : null,
       preferences: map['preferences'] != null
-          ? UserPreferences.fromMap(map['preferences'])
+          ? PersonPreferences.fromMap(map['preferences'])
           : null,
     );
   }
 
   Map<String, dynamic> toMap() {
     return {
+      'userUid': userUid,
       'profile': profile?.toMap(),
       'preferences': preferences?.toMap(),
     };
   }
 }
 
-class UserProfile {
+class PersonProfile {
   String name;
   String gender;
   DateTime dateOfBirth;
+  int age;
   String ethnicity;
   String country;
   String city;
   String educationLevel;
   String currentEducation;
   String profession;
-  int currentSalary;
+  double currentSalary;
   List<String> skills;
-  int previousMarriages;
+  String relationshipStatus;
   String futurePlans;
   String aspirationsAndGoals;
   List<String> hobbies;
   List<String> personalityTraits;
+  String profilePicture;
+  String about;
 
-  UserProfile({
+  PersonProfile({
     required this.name,
     required this.gender,
     required this.dateOfBirth,
@@ -54,15 +58,17 @@ class UserProfile {
     required this.profession,
     required this.currentSalary,
     required this.skills,
-    required this.previousMarriages,
+    required this.relationshipStatus,
     required this.futurePlans,
     required this.aspirationsAndGoals,
     required this.hobbies,
     required this.personalityTraits,
-  });
+    required this.profilePicture,
+    required this.about,
+  }) : age = calculateAge(dateOfBirth);
 
-  factory UserProfile.fromMap(Map<String, dynamic> map) {
-    return UserProfile(
+  factory PersonProfile.fromMap(Map<String, dynamic> map) {
+    return PersonProfile(
       name: map['name'],
       gender: map['gender'],
       dateOfBirth: map['dateOfBirth'].toDate(),
@@ -74,11 +80,13 @@ class UserProfile {
       profession: map['profession'],
       currentSalary: map['currentSalary'],
       skills: List<String>.from(map['skills']),
-      previousMarriages: map['previousMarriages'],
+      relationshipStatus: map['relationshipStatus'],
       futurePlans: map['futurePlans'],
       aspirationsAndGoals: map['aspirationsAndGoals'],
       hobbies: List<String>.from(map['hobbies']),
       personalityTraits: List<String>.from(map['personalityTraits']),
+      profilePicture: map['profilePicture'],
+      about: map['about'],
     );
   }
 
@@ -95,32 +103,48 @@ class UserProfile {
       'profession': profession,
       'currentSalary': currentSalary,
       'skills': skills,
-      'previousMarriages': previousMarriages,
+      'relationshipStatus': relationshipStatus,
       'futurePlans': futurePlans,
       'aspirationsAndGoals': aspirationsAndGoals,
       'hobbies': hobbies,
       'personalityTraits': personalityTraits,
+      'profilePicture': profilePicture,
+      'about': about,
     };
+  }
+
+  static int calculateAge(DateTime dateOfBirth) {
+    // Get the current date and time
+    DateTime now = DateTime.now();
+
+    // Calculate the difference between the current date and the birthdate
+    Duration difference = now.difference(dateOfBirth);
+
+    // Calculate the age in years
+    int age = (difference.inDays / 365).floor();
+
+    return age;
   }
 }
 
-class UserPreferences {
-  String ageRange;
+class PersonPreferences {
+  Map<String, double> preferredAgeRange;
   List<String> acceptableEthnicities;
   String relocationPreference;
   List<String> livingSituations;
   String educationLevelPreference;
   List<String> preferredProfessions;
   List<String> acceptableIndustries;
-  Map<String, int> preferredSalaryRange;
+  Map<String, double> preferredSalaryRange;
   String employmentArrangement;
   List<String> partnerSkills;
   String desiredNumberOfKids;
   List<String> preferredEducationSystem;
   List<String> acceptableRelationshipTypes;
+  List<String> desiredPersonalityTraits;
 
-  UserPreferences({
-    required this.ageRange,
+  PersonPreferences({
+    required this.preferredAgeRange,
     required this.acceptableEthnicities,
     required this.relocationPreference,
     required this.livingSituations,
@@ -133,18 +157,20 @@ class UserPreferences {
     required this.desiredNumberOfKids,
     required this.preferredEducationSystem,
     required this.acceptableRelationshipTypes,
+    required this.desiredPersonalityTraits,
   });
 
-  factory UserPreferences.fromMap(Map<String, dynamic> map) {
-    return UserPreferences(
-      ageRange: map['ageRange'],
+  factory PersonPreferences.fromMap(Map<String, dynamic> map) {
+    return PersonPreferences(
+      preferredAgeRange: Map<String, double>.from(map['preferredAgeRange']),
       acceptableEthnicities: List<String>.from(map['acceptableEthnicities']),
       relocationPreference: map['relocationPreference'],
       livingSituations: List<String>.from(map['livingSituations']),
       educationLevelPreference: map['educationLevelPreference'],
       preferredProfessions: List<String>.from(map['preferredProfessions']),
       acceptableIndustries: List<String>.from(map['acceptableIndustries']),
-      preferredSalaryRange: Map<String, int>.from(map['preferredSalaryRange']),
+      preferredSalaryRange:
+          Map<String, double>.from(map['preferredSalaryRange']),
       employmentArrangement: map['employmentArrangement'],
       partnerSkills: List<String>.from(map['partnerSkills']),
       desiredNumberOfKids: map['desiredNumberOfKids'],
@@ -152,12 +178,14 @@ class UserPreferences {
           List<String>.from(map['preferredEducationSystem']),
       acceptableRelationshipTypes:
           List<String>.from(map['acceptableRelationshipTypes']),
+      desiredPersonalityTraits:
+          List<String>.from(map['desiredPersonalityTraits']),
     );
   }
 
   Map<String, dynamic> toMap() {
     return {
-      'ageRange': ageRange,
+      'preferredAgeRange': preferredAgeRange,
       'acceptableEthnicities': acceptableEthnicities,
       'relocationPreference': relocationPreference,
       'livingSituations': livingSituations,
@@ -170,6 +198,7 @@ class UserPreferences {
       'desiredNumberOfKids': desiredNumberOfKids,
       'preferredEducationSystem': preferredEducationSystem,
       'acceptableRelationshipTypes': acceptableRelationshipTypes,
+      'desiredPersonalityTraits': desiredPersonalityTraits,
     };
   }
 }

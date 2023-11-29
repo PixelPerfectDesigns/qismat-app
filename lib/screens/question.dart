@@ -3,6 +3,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:qismat/screens/questiontype/dropdown_question.dart';
 import 'package:qismat/screens/questiontype/checkbox_question.dart';
 import 'package:qismat/screens/questiontype/doubleslider_question.dart';
+import 'package:qismat/screens/questiontype/file_upload_question.dart';
 import 'package:qismat/screens/questiontype/multiselect_dropdown_question.dart';
 import 'package:qismat/screens/questiontype/text_question.dart';
 import 'package:qismat/screens/questiontype/radio_question.dart';
@@ -87,6 +88,13 @@ class QuestionPage extends StatelessWidget {
           field: field,
         );
         break;
+      case "file_upload":
+        questionWidget = FileUploadWidget(
+          onSave: onSave,
+          question: question,
+          field: field,
+        );
+        break;
 
       // Add handling for other question types here
 
@@ -95,12 +103,21 @@ class QuestionPage extends StatelessWidget {
     }
 
     return Padding(
-      padding: EdgeInsets.all(16),
+      padding: EdgeInsets.all(50),
       child: Center(
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            Center(child: Text(question)),
+            Center(
+              child: Text(
+                question,
+                textAlign: TextAlign.center, // Center the text
+                style: TextStyle(
+                  fontSize: 24, // Set the desired font size
+                  fontWeight: FontWeight.bold, // Optional: Set the font weight
+                ),
+              ),
+            ),
             SizedBox(height: 16),
             Center(child: questionWidget),
           ],

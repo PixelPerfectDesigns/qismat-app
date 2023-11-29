@@ -37,7 +37,13 @@ class _DropdownQuestionWidgetState extends State<DropdownQuestionWidget> {
               selectedOption = value;
             });
           },
+          style: TextStyle(color: Colors.black),
+          iconEnabledColor: Color(0xFFFF5858),
+          // dropdownColor: Color(0xFFFF5858), // Set the dropdown background color
+// Set the dropdown icon color
+          // Set the dropdown text color
         ),
+        SizedBox(height: 16),
         ElevatedButton(
             onPressed: () {
               widget.onSave(widget.question, widget.field, selectedOption);
