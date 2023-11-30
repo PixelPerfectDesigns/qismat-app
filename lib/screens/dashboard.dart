@@ -409,7 +409,7 @@ class UserPage extends StatelessWidget {
                   ),
 
                   ProfileAttribute(
-                    label: 'Aspiration and Goals Plans',
+                    label: 'Aspiration and Goals',
                     value: user.profile?.aspirationsAndGoals ?? 'N/A',
                     icon: Icons.flag,
                   ),

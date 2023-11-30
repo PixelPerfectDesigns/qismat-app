@@ -1,6 +1,5 @@
 import 'dart:math';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:intl/intl.dart';
 
 Future<void> generateTestUsers() async {
   List<Map<String, dynamic>> testUsers = [];
@@ -58,9 +57,27 @@ Future<void> generateTestUsers() async {
 Map<String, dynamic> generateRandomProfile(int i) {
   final random = Random();
   final bool isMale = i.isEven;
+  Map<int, String> names = {
+    1: 'Emily',
+    3: 'Olivia',
+    5: 'Mia',
+    7: 'Emma',
+    9: 'Aria',
+    11: 'Grace',
+    13: 'Scarlett',
+    15: 'Violet',
+    2: 'Noah',
+    4: 'Jackson',
+    6: 'Lucas',
+    8: 'Caleb',
+    10: 'Mason',
+    12: 'Benjamin',
+    14: 'Elijah',
+    16: 'Levi',
+  };
 
   return {
-    'name': 'User ${random.nextInt(100)}',
+    'name': names[i],
     'gender': isMale ? "Male" : "Female",
     'dateOfBirth': DateTime(
       1990 + random.nextInt(10),
@@ -68,21 +85,24 @@ Map<String, dynamic> generateRandomProfile(int i) {
       random.nextInt(28) + 1,
     ),
     'ethnicity': randomEthnicity(),
-    'country': randomCountry(),
-    'city': 'City ${random.nextInt(10)}',
+    'country': 'Canada',
+    'city': randomCanadianCity(),
     'educationLevel': randomEducationLevel(),
     'currentEducation': randomEducationLevel(),
     'profession': randomProfessions('profile'),
     'currentSalary': (20000 + random.nextInt(180000)).toDouble(),
     'skills': randomSkills(),
     'relationshipStatus': randomRelationshipStatus(),
-    'futurePlans': 'Future plans ${random.nextInt(10)}',
-    'aspirationsAndGoals': 'Aspirations ${random.nextInt(10)}',
+    'futurePlans':
+        'Building a future of love, laughter, and shared adventures. Seeking a partner with a similar vision for a joyful life together.',
+    'aspirationsAndGoals':
+        'Aspiring to make a positive impact in technology through my business.',
     'hobbies': randomHobbies(),
     'personalityTraits': randomPersonalityTraits(),
     'profilePicture':
         'https://firebasestorage.googleapis.com/v0/b/qismat-flutter-app.appspot.com/o/uploads%2F1701226238266?alt=media&token=942c47af-4d80-41f6-896c-6d6b2d379078',
-    'about': 'About user ${random.nextInt(10)}',
+    'about':
+        "Passionate about photography and hiking, I embrace life with positivity. Advocating for sustainability, kindness, and personal growth, I'm excited to share my journey and learn about yours. Looking for a partner to and create meaningful moments together!",
   };
 }
 
@@ -145,6 +165,33 @@ String randomCountry() {
   ];
   final random = Random();
   return countries[random.nextInt(countries.length)];
+}
+
+String randomCanadianCity() {
+  final canadianCities = [
+    "Toronto",
+    "Vancouver",
+    "Montreal",
+    "Calgary",
+    "Edmonton",
+    "Ottawa",
+    "Quebec City",
+    "Winnipeg",
+    "Hamilton",
+    "London",
+    "Halifax",
+    "Victoria",
+    "Saskatoon",
+    "Regina",
+    "St. John's",
+    "Kingston",
+    "Fredericton",
+    "Charlottetown",
+    "Yellowknife",
+    "Whitehorse",
+  ];
+  final random = Random();
+  return canadianCities[random.nextInt(canadianCities.length)];
 }
 
 String randomEducationLevel() {
@@ -255,19 +302,19 @@ String randomRelationshipStatus() {
 List<String> randomHobbies() {
   final hobbies = [
     "Reading",
-    "Sports (e.g., tennis, swimming)",
+    "Sports",
     "Traveling",
     "Cooking",
-    "Art (e.g., painting, drawing)",
+    "Art",
     "Gardening",
-    "Gaming (e.g., video games)",
-    "Fitness (e.g., running, yoga)",
+    "Gaming",
+    "Fitness",
     "Photography",
     "Hiking",
-    "Crafts (e.g., knitting, woodworking)",
+    "Crafts",
     "Volunteering",
-    "Writing (e.g., blogging, poetry)",
-    "Collecting (e.g., stamps, coins)",
+    "Writing",
+    "Collecting",
     "Fishing",
     "Camping",
     "Martial Arts",
@@ -276,7 +323,7 @@ List<String> randomHobbies() {
     "Other"
   ];
   final random = Random();
-  return hobbies.where((element) => random.nextBool()).toList();
+  return hobbies.where((element) => random.nextBool()).take(5).toList();
 }
 
 List<String> randomPersonalityTraits() {

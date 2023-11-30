@@ -16,27 +16,20 @@ class _SplashScreenState extends State<SplashScreen> {
   void initState() {
     super.initState();
 
-    // Add a delay and then navigate to AuthOrDashboardScreen
+    // Add a delay before navigating
     Timer(
       Duration(seconds: 2), // Adjust the duration as needed
       () {
-        Navigator.of(context).pushReplacement(
-          MaterialPageRoute(
-            builder: (context) => StreamBuilder(
-              stream: FirebaseAuth.instance.authStateChanges(),
-              builder: (ctx, snapshot) {
-                if (snapshot.hasData) {
-                  // User is signed in, show the dashboard or home screen
-                  return const DashboardScreen();
-                } else {
-                  // User is not signed in, show the authentication screen
-                  return const AuthScreen();
-                }
-              },
-            ),
-          ),
-        );
+        navigateToNextScreen();
       },
+    );
+  }
+
+  void navigateToNextScreen() {
+    Navigator.of(context).pushReplacement(
+      MaterialPageRoute(
+        builder: (context) => AuthOrDashboardScreen(),
+      ),
     );
   }
 
@@ -54,6 +47,26 @@ class _SplashScreenState extends State<SplashScreen> {
           ],
         ),
       ),
+    );
+  }
+}
+
+class AuthOrDashboardScreen extends StatelessWidget {
+  const AuthOrDashboardScreen({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return StreamBuilder(
+      stream: FirebaseAuth.instance.authStateChanges(),
+      builder: (ctx, snapshot) {
+        if (snapshot.hasData) {
+          // User is signed in, show the dashboard or home screen
+          return const DashboardScreen();
+        } else {
+          // User is not signed in, show the authentication screen
+          return const AuthScreen();
+        }
+      },
     );
   }
 }
