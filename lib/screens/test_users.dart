@@ -36,21 +36,18 @@ Future<void> generateTestUsers() async {
         .collection('user_info')
         .doc('preferences')
         .set(preferences, SetOptions(merge: true))
-        .then((_) {
-      print('Preferences saved to Firestore');
-    });
+        .then((_) {});
     // All questions are completed, set isProfileSetupComplete to true
     await FirebaseFirestore.instance
         .collection('users')
         .doc('user_$i')
         .collection('settings')
         .doc("general")
-        .set({'isProfileSetupComplete': true, 'hideProfilePicture': true}).then(
-            (_) {
-      print('Profile setup is complete.');
-    }).catchError((error) {
-      print('Error setting up profile: $error');
-    });
+        .set({'isProfileSetupComplete': true, 'hideProfilePicture': true})
+        .then((_) {})
+        .catchError((error) {
+          print('Error setting up profile: $error');
+        });
   }
 }
 
@@ -78,6 +75,8 @@ Map<String, dynamic> generateRandomProfile(int i) {
 
   return {
     'name': names[i],
+    'contactEmail': '${names[i]}@qismat.app',
+    'contactPhoneNumber': '514-523-1571',
     'gender': isMale ? "Male" : "Female",
     'dateOfBirth': DateTime(
       1990 + random.nextInt(10),
@@ -99,8 +98,9 @@ Map<String, dynamic> generateRandomProfile(int i) {
         'Aspiring to make a positive impact in technology through my business.',
     'hobbies': randomHobbies(),
     'personalityTraits': randomPersonalityTraits(),
-    'profilePicture':
-        'https://firebasestorage.googleapis.com/v0/b/qismat-flutter-app.appspot.com/o/uploads%2F1701226238266?alt=media&token=942c47af-4d80-41f6-896c-6d6b2d379078',
+    'profilePicture': isMale
+        ? 'https://firebasestorage.googleapis.com/v0/b/qismat-flutter-app.appspot.com/o/uploads%2Fmale_profile_pic.jpg?alt=media&token=b354bf0c-a90f-41a5-9e99-54f0063aa1c5'
+        : 'https://firebasestorage.googleapis.com/v0/b/qismat-flutter-app.appspot.com/o/uploads%2Ffemale_profile_pic.jpg?alt=media&token=242ffa26-3749-4a15-a522-5cb4cd36464f',
     'about':
         "Passionate about photography and hiking, I embrace life with positivity. Advocating for sustainability, kindness, and personal growth, I'm excited to share my journey and learn about yours. Looking for a partner to and create meaningful moments together!",
   };

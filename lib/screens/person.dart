@@ -27,6 +27,8 @@ class Person {
 
 class PersonProfile {
   String name;
+  String contactEmail;
+  String contactPhoneNumber;
   String gender;
   DateTime dateOfBirth;
   int age;
@@ -48,6 +50,8 @@ class PersonProfile {
 
   PersonProfile({
     required this.name,
+    required this.contactEmail,
+    required this.contactPhoneNumber,
     required this.gender,
     required this.dateOfBirth,
     required this.ethnicity,
@@ -69,25 +73,26 @@ class PersonProfile {
 
   factory PersonProfile.fromMap(Map<String, dynamic> map) {
     return PersonProfile(
-      name: map['name'],
-      gender: map['gender'],
-      dateOfBirth: map['dateOfBirth'].toDate(),
-      ethnicity: map['ethnicity'],
-      country: map['country'],
-      city: map['city'],
-      educationLevel: map['educationLevel'],
-      currentEducation: map['currentEducation'],
-      profession: map['profession'],
-      currentSalary: map['currentSalary'],
-      skills: List<String>.from(map['skills']),
-      relationshipStatus: map['relationshipStatus'],
-      futurePlans: map['futurePlans'],
-      aspirationsAndGoals: map['aspirationsAndGoals'],
-      hobbies: List<String>.from(map['hobbies']),
-      personalityTraits: List<String>.from(map['personalityTraits']),
-      profilePicture: map['profilePicture'],
-      about: map['about'],
-    );
+        name: map['name'],
+        gender: map['gender'],
+        dateOfBirth: map['dateOfBirth'].toDate(),
+        ethnicity: map['ethnicity'],
+        country: map['country'],
+        city: map['city'],
+        educationLevel: map['educationLevel'],
+        currentEducation: map['currentEducation'],
+        profession: map['profession'],
+        currentSalary: map['currentSalary'],
+        skills: List<String>.from(map['skills']),
+        relationshipStatus: map['relationshipStatus'],
+        futurePlans: map['futurePlans'],
+        aspirationsAndGoals: map['aspirationsAndGoals'],
+        hobbies: List<String>.from(map['hobbies']),
+        personalityTraits: List<String>.from(map['personalityTraits']),
+        profilePicture: map['profilePicture'],
+        about: map['about'],
+        contactEmail: map['contactEmail'],
+        contactPhoneNumber: map['contactPhoneNumber']);
   }
 
   Map<String, dynamic> toMap() {
@@ -110,6 +115,8 @@ class PersonProfile {
       'personalityTraits': personalityTraits,
       'profilePicture': profilePicture,
       'about': about,
+      'contactPhoneNumber': contactPhoneNumber,
+      'contactEmail': contactEmail,
     };
   }
 

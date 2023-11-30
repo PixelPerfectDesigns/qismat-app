@@ -1,12 +1,95 @@
 import 'package:flutter/material.dart';
 import 'package:qismat/screens/person.dart';
+import 'package:qismat/screens/matchmaking.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:qismat/screens/auth/auth.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 class UserPage extends StatelessWidget {
   final Person user;
 
   const UserPage({Key? key, required this.user}) : super(key: key);
+
+  Future<void> requestPictureLogic() async {
+    try {
+      await FirebaseFirestore.instance
+          .collection('users')
+          .doc(getCurrentUser()!.uid)
+          .collection('matches')
+          .doc('allFilteredMatches')
+          .collection(user.userUid!) // Subcollection with the user ID
+          .doc('info')
+          .update({'hideProfilePicture': false});
+    } catch (e) {
+      print('Error updating user data: $e');
+      // Handle the error as needed
+    }
+  }
+
+  void _showContactInfoPopup(BuildContext context, Person user) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          backgroundColor: Colors.grey[200], // Customize background color
+          title: const Text(
+            'Contact Information',
+            style: TextStyle(
+              color: Color(0xFFFF5858), // Customize text color
+            ),
+          ),
+          content: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              const Text(
+                'Email:',
+                style: TextStyle(
+                  color: Color(0xFFFF5858),
+                  fontWeight: FontWeight.bold, // Make the label bold
+                ),
+              ),
+              Text(
+                '${user.profile?.contactEmail ?? 'N/A'}',
+                style: TextStyle(
+                  color: Colors.black, // Customize text color
+                  fontSize: 20.0, // Increase the font size
+                ),
+              ),
+              const SizedBox(height: 8.0),
+              const Text(
+                'Phone:',
+                style: TextStyle(
+                  color: Color(0xFFFF5858),
+                  fontWeight: FontWeight.bold, // Make the label bold
+                ),
+              ),
+              Text(
+                '${user.profile?.contactPhoneNumber ?? 'N/A'}',
+                style: const TextStyle(
+                  color: Colors.black, // Customize text color
+                  fontSize: 20.0, // Increase the font size
+                ),
+              ),
+            ],
+          ),
+          actions: [
+            TextButton(
+              onPressed: () {
+                Navigator.pop(context); // Close the pop-up
+              },
+              child: const Text(
+                'Close',
+                style: TextStyle(
+                  color: Color(0xFFFF5858), // Customize button text color
+                ),
+              ),
+            ),
+          ],
+        );
+      },
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -33,18 +116,20 @@ class UserPage extends StatelessWidget {
                 );
               }).toList();
             },
-            onSelected: (String choice) {
+            onSelected: (String choice) async {
               switch (choice) {
                 case 'Request Picture':
+                  await requestPictureLogic();
                   // Implement your logic for 'Request Picture'
                   break;
                 case 'Request Contact Info':
+                  _showContactInfoPopup(context, user);
+
                   break;
                 case 'Save to Favorites':
                   break;
                 case 'Logout':
                   FirebaseAuth.instance.signOut();
-                  Navigator.pop(context);
 
                   Navigator.of(context).pushReplacement(
                     MaterialPageRoute(builder: (context) => const AuthScreen()),
@@ -64,61 +149,67 @@ class UserPage extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              // StreamBuilder<DocumentSnapshot>(
-              //   stream: FirebaseFirestore.instance
-              //       .collection('users')
-              //       .doc(user.userUid)
-              //       .collection('settings')
-              //       .doc('general')
-              //       .snapshots(),
-              //   builder: (context, snapshot) {
-              //     if (snapshot.connectionState == ConnectionState.waiting) {
-              //       // While waiting for the data, you can show a loading indicator or a default state.
-              //       return CircularProgressIndicator();
-              //     } else if (snapshot.hasError) {
-              //       // Handle errors here
-              //       return Text('Error: ${snapshot.error}');
-              //     } else {
-              //       // Check the value of hideProfilePicture in the document
-              //       bool hideProfilePicture =
-              //           snapshot.data?['hideProfilePicture'] ?? false;
+              StreamBuilder<DocumentSnapshot>(
+                stream: FirebaseFirestore.instance
+                    .collection('users')
+                    .doc(getCurrentUser()!.uid)
+                    .collection('matches')
+                    .doc('allFilteredMatches')
+                    .collection(user.userUid!)
+                    .doc('info')
+                    .snapshots(),
+                builder: (context, snapshot) {
+                  if (snapshot.connectionState == ConnectionState.waiting) {
+                    // While waiting for the data, you can show a loading indicator or a default state.
+                    return const CircularProgressIndicator();
+                  } else if (snapshot.hasError) {
+                    // Handle errors here
+                    return Text('Error: ${snapshot.error}');
+                  } else {
+                    // Check the value of hideProfilePicture in the document
+                    bool hideProfilePicture =
+                        snapshot.data?['hideProfilePicture'] ?? false;
 
-              //       // Display either the placeholder icon or the user's profile picture
-              //       return CircleAvatar(
-              //         radius: 80.0,
-              //         backgroundColor: Color(0xFFFF5858),
-              //         child: hideProfilePicture
-              //             ? Icon(
-              //                 user.profile?.gender == 'Male'
-              //                     ? Icons.face
-              //                     : Icons.face_4_rounded,
-              //                 size: 60.0,
-              //                 color: Colors.white,
-              //               )
-              //             : // Use user's profile picture here
-              //             user.profile?.pic != null
-              //                 ? Image.network(user.profile?.pic)
-              //                 : Icon(
-              //                     user.profile?.gender == 'Male'
-              //                         ? Icons.face
-              //                         : Icons.face_4_rounded,
-              //                     size: 60.0,
-              //                     color: Colors.white,
-              //                   ),
-              //       );
-              //     }
-              //   },
-              // ),
-              CircleAvatar(
-                radius: 80.0,
-                backgroundColor: const Color(0xFFFF5858),
-                child: Icon(
-                  user.profile?.gender == 'Male'
-                      ? Icons.face
-                      : Icons.face_4_rounded, // Choose the male icon
-                  size: 60.0, // Adjust the size as needed
-                  color: Colors.white, // Placeholder icon color
-                ),
+                    // Display either the placeholder icon or the user's profile picture
+                    return hideProfilePicture
+                        ? CircleAvatar(
+                            radius: 80.0,
+                            backgroundColor: const Color(0xFFFF5858),
+                            child: Icon(
+                              user.profile?.gender == 'Male'
+                                  ? Icons.face
+                                  : Icons.face_4_rounded,
+                              size: 60.0,
+                              color: Colors.white,
+                            ),
+                          )
+                        : user.profile?.profilePicture != null
+                            ? CircleAvatar(
+                                radius: 80.0,
+                                backgroundColor: Colors.white,
+                                child: ClipOval(
+                                  child: Image.network(
+                                    user.profile!.profilePicture,
+                                    width:
+                                        150.0, // Adjust the width and height as needed
+                                    height: 150.0,
+                                    fit: BoxFit.cover,
+                                  ),
+                                ),
+                              )
+                            : CircleAvatar(
+                                radius: 80.0,
+                                backgroundColor: const Color(0xFFFF5858),
+                                child: Icon(
+                                  user.profile?.gender == 'Male'
+                                      ? Icons.face
+                                      : Icons.face_4_rounded,
+                                  size: 60.0,
+                                  color: Colors.white,
+                                ),
+                              );
+                  }
+                },
               ),
               const SizedBox(height: 16.0),
               Text(
@@ -220,7 +311,7 @@ class ProfileAttribute extends StatelessWidget {
   final String value;
   final IconData icon;
 
-  ProfileAttribute({
+  const ProfileAttribute({
     required this.label,
     required this.value,
     required this.icon,

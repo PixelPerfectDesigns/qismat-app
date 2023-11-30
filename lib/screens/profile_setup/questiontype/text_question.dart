@@ -5,7 +5,7 @@ class TextQuestionWidget extends StatefulWidget {
   final String question;
   final String field;
 
-  TextQuestionWidget({
+  const TextQuestionWidget({
     required this.onSave,
     required this.question,
     required this.field,
@@ -24,7 +24,7 @@ class _TextQuestionWidgetState extends State<TextQuestionWidget> {
       children: [
         TextField(
           controller: _textController,
-          decoration: InputDecoration(
+          decoration: const InputDecoration(
             labelStyle: TextStyle(
                 color: Color(
                     0xFFFF5858)), // Set the color of the email address string
@@ -39,14 +39,14 @@ class _TextQuestionWidgetState extends State<TextQuestionWidget> {
                       0xFFFF5858)), // Set the color of the enabled (idle) text box border
             ),
           ),
-          cursorColor: Color(0xFFFF5858),
+          cursorColor: const Color(0xFFFF5858),
         ),
-        SizedBox(height: 16),
+        const SizedBox(height: 16),
         ElevatedButton(
             style: ElevatedButton.styleFrom(
-              backgroundColor: Color(0xFFFF5858),
+              backgroundColor: const Color(0xFFFF5858),
             ),
-            child: Text("Next", style: TextStyle(color: Colors.white)),
+            child: const Text("Next", style: TextStyle(color: Colors.white)),
             onPressed: () {
               final answer = _textController.text;
               widget.onSave(widget.question, widget.field, answer);

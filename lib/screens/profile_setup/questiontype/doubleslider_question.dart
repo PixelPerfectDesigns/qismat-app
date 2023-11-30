@@ -7,7 +7,7 @@ class DoubleSliderQuestionWidget extends StatefulWidget {
   final double maxValue; // Add maxValue property
   final String field;
 
-  DoubleSliderQuestionWidget({
+  const DoubleSliderQuestionWidget({
     required this.onSave,
     required this.question,
     required this.minValue,
@@ -41,8 +41,8 @@ class _DoubleSliderQuestionWidgetState
           value: _minSliderValue,
           min: widget.minValue,
           max: widget.maxValue,
-          activeColor: Color(0xFFFF5858),
-          inactiveColor: Color(0xFFFFE1E1),
+          activeColor: const Color(0xFFFF5858),
+          inactiveColor: const Color(0xFFFFE1E1),
           onChanged: (value) {
             setState(() {
               _minSliderValue = value;
@@ -54,8 +54,8 @@ class _DoubleSliderQuestionWidgetState
           value: _maxSliderValue,
           min: widget.minValue,
           max: widget.maxValue,
-          activeColor: Color(0xFFFF5858),
-          inactiveColor: Color(0xFFFFE1E1),
+          activeColor: const Color(0xFFFF5858),
+          inactiveColor: const Color(0xFFFFE1E1),
           onChanged: (value) {
             setState(() {
               _maxSliderValue = value;
@@ -63,16 +63,16 @@ class _DoubleSliderQuestionWidgetState
           },
         ),
         Text("Max: ${_maxSliderValue.toStringAsFixed(0)}"),
-        SizedBox(height: 16),
+        const SizedBox(height: 16),
         ElevatedButton(
             onPressed: () {
               widget.onSave(widget.question, widget.field,
                   {"min": _minSliderValue, "max": _maxSliderValue});
             },
             style: ElevatedButton.styleFrom(
-              backgroundColor: Color(0xFFFF5858),
+              backgroundColor: const Color(0xFFFF5858),
             ),
-            child: Text("Next", style: TextStyle(color: Colors.white))),
+            child: const Text("Next", style: TextStyle(color: Colors.white))),
       ],
     );
   }

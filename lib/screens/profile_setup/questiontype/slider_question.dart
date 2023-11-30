@@ -7,7 +7,7 @@ class SliderQuestionWidget extends StatefulWidget {
   final double maxValue; // Add maxValue property
   final String field;
 
-  SliderQuestionWidget({
+  const SliderQuestionWidget({
     required this.onSave,
     required this.question,
     required this.minValue,
@@ -37,8 +37,8 @@ class _SliderQuestionWidgetState extends State<SliderQuestionWidget> {
           value: _sliderValue,
           min: widget.minValue,
           max: widget.maxValue,
-          activeColor: Color(0xFFFF5858),
-          inactiveColor: Color(0xFFFFE1E1),
+          activeColor: const Color(0xFFFF5858),
+          inactiveColor: const Color(0xFFFFE1E1),
           onChanged: (value) {
             setState(() {
               _sliderValue = value;
@@ -46,14 +46,14 @@ class _SliderQuestionWidgetState extends State<SliderQuestionWidget> {
           },
         ),
         Text("${_sliderValue.toStringAsFixed(0)}"),
-        SizedBox(
+        const SizedBox(
           height: 16,
         ),
         ElevatedButton(
           style: ElevatedButton.styleFrom(
-            backgroundColor: Color(0xFFFF5858),
+            backgroundColor: const Color(0xFFFF5858),
           ),
-          child: Text("Next", style: TextStyle(color: Colors.white)),
+          child: const Text("Next", style: TextStyle(color: Colors.white)),
           onPressed: () {
             widget.onSave(widget.question, widget.field, _sliderValue);
           },

@@ -9,7 +9,7 @@ void main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
-  // await generateTestUsers();
+  await generateTestUsers();
 
   runApp(const App());
 }

@@ -8,12 +8,14 @@ import 'package:qismat/screens/profile_setup/questiontype/text_question.dart';
 import 'package:qismat/screens/profile_setup/questiontype/radio_question.dart';
 import 'package:qismat/screens/profile_setup/questiontype/slider_question.dart';
 import 'package:qismat/screens/profile_setup/questiontype/dateselect_question.dart';
+import 'package:qismat/screens/profile_setup/questiontype/email_question.dart';
+import 'package:qismat/screens/profile_setup/questiontype/phonenumber_question.dart';
 
 class QuestionPage extends StatelessWidget {
   final Map<String, dynamic> questionData;
   final Function(String, String, dynamic) onSave;
 
-  QuestionPage({
+  const QuestionPage({
     required this.questionData,
     required this.onSave,
   });
@@ -89,6 +91,20 @@ class QuestionPage extends StatelessWidget {
         break;
       case "file_upload":
         questionWidget = FileUploadWidget(
+          onSave: onSave,
+          question: question,
+          field: field,
+        );
+        break;
+      case "email":
+        questionWidget = EmailWidget(
+          onSave: onSave,
+          question: question,
+          field: field,
+        );
+        break;
+      case "phone_number":
+        questionWidget = PhoneNumberWidget(
           onSave: onSave,
           question: question,
           field: field,

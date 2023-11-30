@@ -29,7 +29,6 @@ Future<List<Person>> filterMatches() async {
             calculateMatchPercentage(currentUser, matchingUser);
         print(matchingPercentage);
         if (matchingPercentage >= 60) {
-          print(matchingUser.userUid);
           filteredMatches.add(matchingUser);
           String matchingUserID = matchingUser.userUid.toString();
           Map<String, dynamic> filteredMatchingUser = {
@@ -46,9 +45,9 @@ Future<List<Person>> filterMatches() async {
                 .collection('matches')
                 .doc('allFilteredMatches')
                 .collection(matchingUserID) // Subcollection with the user ID
-                .doc('filteredMatchingUser'),
+                .doc('info'),
             filteredMatchingUser,
-            SetOptions(merge: true), // Merge with existing data
+            // SetOptions(merge: true), // Merge with existing data
           );
         }
       }
@@ -61,7 +60,7 @@ Future<List<Person>> filterMatches() async {
             .collection('matches')
             .doc('allFilteredMatches'),
         {'placeholder': true}, // Add a placeholder field
-        SetOptions(merge: true), // Create the document if it doesn't exist
+        // SetOptions(merge: true), // Create the document if it doesn't exist
       );
 
       // Commit the batch

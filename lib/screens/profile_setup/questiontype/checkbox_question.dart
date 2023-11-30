@@ -6,7 +6,7 @@ class CheckboxesQuestionWidget extends StatefulWidget {
   final List<String> options;
   final String field;
 
-  CheckboxesQuestionWidget({
+  const CheckboxesQuestionWidget({
     required this.onSave,
     required this.question,
     required this.options,
@@ -43,13 +43,13 @@ class _CheckboxesQuestionWidgetState extends State<CheckboxesQuestionWidget> {
                     selectedOptions[i] = value!;
                   });
                 },
-                activeColor: Color(0xFFFF5858),
+                activeColor: const Color(0xFFFF5858),
               ),
               Text(widget.options[i]),
             ],
           ),
         ],
-        SizedBox(height: 8.0),
+        const SizedBox(height: 8.0),
         Center(
             child: ElevatedButton(
                 onPressed: () {
@@ -62,9 +62,9 @@ class _CheckboxesQuestionWidgetState extends State<CheckboxesQuestionWidget> {
                   widget.onSave(widget.question, widget.field, selectedValues);
                 },
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: Color(0xFFFF5858),
+                  backgroundColor: const Color(0xFFFF5858),
                 ),
-                child: Text("Next",
+                child: const Text("Next",
                     style: TextStyle(
                         color: Colors
                             .white)))) // Add some spacing between checkboxes and the button

@@ -4,6 +4,8 @@ import 'package:qismat/screens/person.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:qismat/screens/auth/auth.dart';
 import 'package:qismat/screens/user_page.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'dart:async';
 
 class DashboardScreen extends StatefulWidget {
   const DashboardScreen({Key? key}) : super(key: key);
@@ -17,10 +19,19 @@ class _DashboardScreenState extends State<DashboardScreen> {
   late Person currentMatch;
   int _currentIndex = 0;
 
+  late StreamSubscription<DocumentSnapshot>? _streamSubscription;
+
   @override
   void initState() {
     super.initState();
     filteredMatches = filterMatches();
+  }
+
+  @override
+  void dispose() {
+    // Cancel the stream subscription when the widget is disposed
+    _streamSubscription?.cancel();
+    super.dispose();
   }
 
   @override
@@ -51,7 +62,6 @@ class _DashboardScreenState extends State<DashboardScreen> {
             onSelected: (String choice) {
               if (choice == 'Logout') {
                 FirebaseAuth.instance.signOut();
-                Navigator.pop(context);
                 Navigator.of(context).pushReplacement(
                   MaterialPageRoute(builder: (context) => const AuthScreen()),
                 );
@@ -88,18 +98,77 @@ class _DashboardScreenState extends State<DashboardScreen> {
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(16.0),
                     ),
-                    tileColor: Colors.grey[200], // Light gray color
+                    tileColor: Colors.grey[50], // Light gray color
                     contentPadding: const EdgeInsets.all(16.0),
-                    leading: CircleAvatar(
-                      radius: 30.0,
-                      backgroundColor: const Color(0xFFFF5858),
-                      child: Icon(
-                        snapshot.data![index].profile?.gender == 'Male'
-                            ? Icons.face
-                            : Icons.face_4_rounded,
-                        size: 24.0,
-                        color: Colors.white,
-                      ),
+                    leading: StreamBuilder<DocumentSnapshot>(
+                      stream: FirebaseFirestore.instance
+                          .collection('users')
+                          .doc(getCurrentUser()!.uid)
+                          .collection('matches')
+                          .doc('allFilteredMatches')
+                          .collection(currentMatch.userUid!)
+                          .doc('info')
+                          .snapshots(),
+                      builder: (context, snapshot) {
+                        if (snapshot.connectionState ==
+                            ConnectionState.waiting) {
+                          // While waiting for the data,
+                          return const CircularProgressIndicator();
+                        } else if (snapshot.hasError) {
+                          // Handle errors here
+                          return Text('Error: ${snapshot.error}');
+                        } else {
+                          // Check the value of hideProfilePicture in the document
+                          bool hideProfilePicture =
+                              snapshot.data?['hideProfilePicture'] ?? false;
+
+                          // Assign the StreamSubscription to the variable
+                          _streamSubscription =
+                              snapshot.connectionState == ConnectionState.active
+                                  ? snapshot.data?.reference
+                                      .snapshots()
+                                      .listen((event) {})
+                                  : null;
+
+                          // Display either the placeholder icon or the user's profile picture
+                          return hideProfilePicture
+                              ? CircleAvatar(
+                                  radius: 30.0,
+                                  backgroundColor: const Color(0xFFFF5858),
+                                  child: Icon(
+                                    currentMatch.profile?.gender == 'Male'
+                                        ? Icons.face
+                                        : Icons.face_4_rounded,
+                                    size: 24.0,
+                                    color: Colors.white,
+                                  ),
+                                )
+                              : currentMatch.profile?.profilePicture != null
+                                  ? CircleAvatar(
+                                      radius: 30.0,
+                                      backgroundColor: const Color(0xFFFF5858),
+                                      child: ClipOval(
+                                        child: Image.network(
+                                          currentMatch.profile!.profilePicture,
+                                          width: 50.0,
+                                          height: 50.0,
+                                          fit: BoxFit.cover,
+                                        ),
+                                      ),
+                                    )
+                                  : CircleAvatar(
+                                      radius: 30.0,
+                                      backgroundColor: const Color(0xFFFF5858),
+                                      child: Icon(
+                                        currentMatch.profile?.gender == 'Male'
+                                            ? Icons.face
+                                            : Icons.face_4_rounded,
+                                        size: 24.0,
+                                        color: Colors.white,
+                                      ),
+                                    );
+                        }
+                      },
                     ),
                     title: Text(
                       snapshot.data![index].profile?.name ?? 'No name',

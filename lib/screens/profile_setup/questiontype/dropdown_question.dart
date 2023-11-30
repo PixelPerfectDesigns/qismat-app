@@ -6,7 +6,7 @@ class DropdownQuestionWidget extends StatefulWidget {
   final List<String> options;
   final String field;
 
-  DropdownQuestionWidget({
+  const DropdownQuestionWidget({
     required this.onSave,
     required this.question,
     required this.options,
@@ -37,21 +37,21 @@ class _DropdownQuestionWidgetState extends State<DropdownQuestionWidget> {
               selectedOption = value;
             });
           },
-          style: TextStyle(color: Colors.black),
-          iconEnabledColor: Color(0xFFFF5858),
+          style: const TextStyle(color: Colors.black),
+          iconEnabledColor: const Color(0xFFFF5858),
           // dropdownColor: Color(0xFFFF5858), // Set the dropdown background color
 // Set the dropdown icon color
           // Set the dropdown text color
         ),
-        SizedBox(height: 16),
+        const SizedBox(height: 16),
         ElevatedButton(
             onPressed: () {
               widget.onSave(widget.question, widget.field, selectedOption);
             },
             style: ElevatedButton.styleFrom(
-              backgroundColor: Color(0xFFFF5858),
+              backgroundColor: const Color(0xFFFF5858),
             ),
-            child: Text("Next", style: TextStyle(color: Colors.white))),
+            child: const Text("Next", style: TextStyle(color: Colors.white))),
       ],
     );
   }

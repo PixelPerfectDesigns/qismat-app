@@ -52,22 +52,3 @@ class _SplashScreenState extends State<SplashScreen> {
     );
   }
 }
-
-// class SplashNavigatorScreen extends StatelessWidget {
-//   const SplashNavigatorScreen({Key? key}) : super(key: key);
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return StreamBuilder(
-//       stream: FirebaseAuth.instance.authStateChanges(),
-//       builder: (ctx, snapshot) {
-//         if (snapshot.hasData) {
-//           return AuthNavigator();
-//         } else {
-//           // User is not signed in, show the authentication screen
-//           return const AuthScreen();
-//         }
-//       },
-//     );
-//   }
-// }

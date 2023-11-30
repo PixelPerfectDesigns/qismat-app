@@ -6,7 +6,7 @@ class RadioQuestionWidget extends StatefulWidget {
   final List<String> options;
   final String field;
 
-  RadioQuestionWidget({
+  const RadioQuestionWidget({
     required this.onSave,
     required this.question,
     required this.options,
@@ -35,16 +35,16 @@ class _RadioQuestionWidgetState extends State<RadioQuestionWidget> {
                   _selectedOption = value;
                 });
               },
-              activeColor: Color(0xFFFF5858),
+              activeColor: const Color(0xFFFF5858),
             );
           }).toList(),
         ),
-        SizedBox(height: 16),
+        const SizedBox(height: 16),
         ElevatedButton(
           style: ElevatedButton.styleFrom(
-            backgroundColor: Color(0xFFFF5858),
+            backgroundColor: const Color(0xFFFF5858),
           ),
-          child: Text("Next", style: TextStyle(color: Colors.white)),
+          child: const Text("Next", style: TextStyle(color: Colors.white)),
           onPressed: () {
             widget.onSave(widget.question, widget.field, _selectedOption);
           },

@@ -6,6 +6,16 @@
 
     },
     {
+      "type": "phone_number",
+      "question": "What phone number can be used to reach you?",
+      "field": "contactPhoneNumber"
+    },
+    {
+      "type": "email",
+      "question": "Which email address should be used to contact you?",
+      "field": "contactEmail"
+    },
+    {
         "type": "dropdown",
         "question": "Gender?",
         "field": "gender",

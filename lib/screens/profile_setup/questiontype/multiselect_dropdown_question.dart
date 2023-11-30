@@ -7,7 +7,7 @@ class MultiSelectDropdownQuestionWidget extends StatefulWidget {
   final List<String> options;
   final String field;
 
-  MultiSelectDropdownQuestionWidget({
+  const MultiSelectDropdownQuestionWidget({
     required this.onSave,
     required this.question,
     required this.options,
@@ -37,19 +37,19 @@ class _MultiSelectDropdownQuestionWidgetState
               selectedOptions = values;
             });
           },
-          selectedItemsTextStyle: TextStyle(color: Colors.black),
-          backgroundColor: Color(0xFFFFDEDE),
+          selectedItemsTextStyle: const TextStyle(color: Colors.black),
+          backgroundColor: const Color(0xFFFFDEDE),
           unselectedColor: Colors.white,
-          selectedColor: Color(0xFF7A7A),
-          checkColor: Color(0xFFFF5858),
+          selectedColor: const Color(0xFFFF7A7A),
+          checkColor: const Color(0xFFFF5858),
         ),
         Padding(
           padding: const EdgeInsets.only(top: 16.0),
           child: ElevatedButton(
             style: ElevatedButton.styleFrom(
-              backgroundColor: Color(0xFFFF5858),
+              backgroundColor: const Color(0xFFFF5858),
             ),
-            child: Text("Next", style: TextStyle(color: Colors.white)),
+            child: const Text("Next", style: TextStyle(color: Colors.white)),
             onPressed: () {
               widget.onSave(widget.question, widget.field, selectedOptions);
             },
