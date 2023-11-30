@@ -18,7 +18,7 @@ class _SplashScreenState extends State<SplashScreen> {
 
     // Add a delay before navigating
     Timer(
-      Duration(seconds: 2), // Adjust the duration as needed
+      const Duration(seconds: 2), // Adjust the duration as needed
       () {
         navigateToNextScreen();
       },
@@ -28,7 +28,9 @@ class _SplashScreenState extends State<SplashScreen> {
   void navigateToNextScreen() {
     Navigator.of(context).pushReplacement(
       MaterialPageRoute(
-        builder: (context) => AuthOrDashboardScreen(),
+        builder: (context) => FirebaseAuth.instance.currentUser != null
+            ? AuthNavigator()
+            : const AuthScreen(),
       ),
     );
   }
@@ -51,21 +53,21 @@ class _SplashScreenState extends State<SplashScreen> {
   }
 }
 
-class AuthOrDashboardScreen extends StatelessWidget {
-  const AuthOrDashboardScreen({Key? key}) : super(key: key);
+// class SplashNavigatorScreen extends StatelessWidget {
+//   const SplashNavigatorScreen({Key? key}) : super(key: key);
 
-  @override
-  Widget build(BuildContext context) {
-    return StreamBuilder(
-      stream: FirebaseAuth.instance.authStateChanges(),
-      builder: (ctx, snapshot) {
-        if (snapshot.hasData) {
-          return AuthNavigator();
-        } else {
-          // User is not signed in, show the authentication screen
-          return const AuthScreen();
-        }
-      },
-    );
-  }
-}
+//   @override
+//   Widget build(BuildContext context) {
+//     return StreamBuilder(
+//       stream: FirebaseAuth.instance.authStateChanges(),
+//       builder: (ctx, snapshot) {
+//         if (snapshot.hasData) {
+//           return AuthNavigator();
+//         } else {
+//           // User is not signed in, show the authentication screen
+//           return const AuthScreen();
+//         }
+//       },
+//     );
+//   }
+// }

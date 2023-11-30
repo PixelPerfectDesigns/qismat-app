@@ -154,7 +154,9 @@ class _ProfileQuestionsScreenState extends State<ProfileQuestionsScreen> {
                   onSelected: (String choice) {
                     if (choice == 'Logout') {
                       FirebaseAuth.instance.signOut();
-                      Navigator.of(context).pushReplacement(
+                      Navigator.pop(context);
+
+                      Navigator.of(context).push(
                         MaterialPageRoute(
                             builder: (context) => const AuthScreen()),
                       );

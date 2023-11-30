@@ -22,24 +22,30 @@ class _AuthNavigatorState extends State<AuthNavigator> {
     User? user = _auth.currentUser;
 
     if (user != null) {
-      bool isProfileSetupComplete = await checkProfileSetupStatus(user.uid);
+      try {
+        bool isProfileSetupComplete = await checkProfileSetupStatus(user.uid);
 
-      if (isProfileSetupComplete) {
-        // Profile setup is complete, navigate to the Dashboard screen
-        Navigator.pushReplacement(
-          context,
-          MaterialPageRoute(
-            builder: (context) => const DashboardScreen(),
-          ),
-        );
-      } else {
-        // Profile setup is not complete, navigate to the Profile Questions screen
-        Navigator.pushReplacement(
-          context,
-          MaterialPageRoute(
-            builder: (context) => ProfileQuestionsScreen(),
-          ),
-        );
+        WidgetsBinding.instance!.addPostFrameCallback((_) {
+          if (isProfileSetupComplete) {
+            // Profile setup is complete, navigate to the Dashboard screen
+            Navigator.pushReplacement(
+              context,
+              MaterialPageRoute(
+                builder: (context) => const DashboardScreen(),
+              ),
+            );
+          } else {
+            // Profile setup is not complete, navigate to the Profile Questions screen
+            Navigator.pushReplacement(
+              context,
+              MaterialPageRoute(
+                builder: (context) => ProfileQuestionsScreen(),
+              ),
+            );
+          }
+        });
+      } catch (e) {
+        print("Error checking profile setup status: $e");
       }
     }
   }
