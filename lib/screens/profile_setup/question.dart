@@ -1,14 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:qismat/screens/questiontype/dropdown_question.dart';
-import 'package:qismat/screens/questiontype/checkbox_question.dart';
-import 'package:qismat/screens/questiontype/doubleslider_question.dart';
-import 'package:qismat/screens/questiontype/file_upload_question.dart';
-import 'package:qismat/screens/questiontype/multiselect_dropdown_question.dart';
-import 'package:qismat/screens/questiontype/text_question.dart';
-import 'package:qismat/screens/questiontype/radio_question.dart';
-import 'package:qismat/screens/questiontype/slider_question.dart';
-import 'package:qismat/screens/questiontype/dateselect_question.dart';
+import 'package:qismat/screens/profile_setup/questiontype/dropdown_question.dart';
+import 'package:qismat/screens/profile_setup/questiontype/checkbox_question.dart';
+import 'package:qismat/screens/profile_setup/questiontype/doubleslider_question.dart';
+import 'package:qismat/screens/profile_setup/questiontype/file_upload_question.dart';
+import 'package:qismat/screens/profile_setup/questiontype/multiselect_dropdown_question.dart';
+import 'package:qismat/screens/profile_setup/questiontype/text_question.dart';
+import 'package:qismat/screens/profile_setup/questiontype/radio_question.dart';
+import 'package:qismat/screens/profile_setup/questiontype/slider_question.dart';
+import 'package:qismat/screens/profile_setup/questiontype/dateselect_question.dart';
 
 class QuestionPage extends StatelessWidget {
   final Map<String, dynamic> questionData;
@@ -95,7 +94,6 @@ class QuestionPage extends StatelessWidget {
           field: field,
         );
         break;
-
       // Add handling for other question types here
 
       default:
@@ -103,7 +101,7 @@ class QuestionPage extends StatelessWidget {
     }
 
     return Padding(
-      padding: EdgeInsets.all(50),
+      padding: const EdgeInsets.all(50),
       child: Center(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
@@ -112,13 +110,13 @@ class QuestionPage extends StatelessWidget {
               child: Text(
                 question,
                 textAlign: TextAlign.center, // Center the text
-                style: TextStyle(
+                style: const TextStyle(
                   fontSize: 24, // Set the desired font size
                   fontWeight: FontWeight.bold, // Optional: Set the font weight
                 ),
               ),
             ),
-            SizedBox(height: 16),
+            const SizedBox(height: 16),
             Center(child: questionWidget),
           ],
         ),

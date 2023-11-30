@@ -3,7 +3,7 @@ import 'package:qismat/screens/matchmaking.dart';
 import 'package:qismat/screens/person.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:qismat/screens/auth.dart';
+import 'package:qismat/screens/auth/auth.dart';
 
 class DashboardScreen extends StatefulWidget {
   const DashboardScreen({Key? key}) : super(key: key);
@@ -51,7 +51,6 @@ class _DashboardScreenState extends State<DashboardScreen> {
             onSelected: (String choice) {
               if (choice == 'Logout') {
                 FirebaseAuth.instance.signOut();
-                Navigator.of(context).pop(); // Close the current screen
                 Navigator.of(context).pushReplacement(
                   MaterialPageRoute(builder: (context) => const AuthScreen()),
                 );

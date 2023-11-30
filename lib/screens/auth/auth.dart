@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:qismat/screens/google_signin.dart';
-import 'package:qismat/screens/facebook_signin.dart';
-import 'package:qismat/screens/dashboard.dart';
-import 'package:qismat/screens/profile_setup.dart';
-import 'package:qismat/screens/profile_questions.dart';
+import 'package:qismat/screens/auth/google_signin.dart';
+import 'package:qismat/screens/auth/facebook_signin.dart';
+import 'package:qismat/screens/auth/auth_navigator.dart';
 
 final _firebase = FirebaseAuth.instance;
 
@@ -30,7 +28,6 @@ class _AuthScreenState extends State<AuthScreen> {
     if (!isValid) {
       return;
     }
-
     _form.currentState!.save();
 
     try {
@@ -44,25 +41,14 @@ class _AuthScreenState extends State<AuthScreen> {
       }
       final User? user = userCredentials.user;
       if (user != null) {
-        bool isProfileSetupComplete = await checkProfileSetupStatus(user.uid);
-
-        if (isProfileSetupComplete) {
-          // Profile setup is complete, navigate to the Dashboard screen
-          Navigator.push(
-            context,
-            MaterialPageRoute(
-              builder: (context) => DashboardScreen(),
-            ),
-          );
-        } else {
-          // Profile setup is not complete, navigate to the Profile Questions screen
-          Navigator.push(
-            context,
-            MaterialPageRoute(
-              builder: (context) => ProfileQuestionsScreen(),
-            ),
-          );
-        }
+        // User successfully signed in with Google
+        // Navigate using AuthNavigator widget
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(
+            builder: (context) => AuthNavigator(),
+          ),
+        );
       }
     } on FirebaseAuthException catch (error) {
       if (error.code == 'email-already-in-use') {
@@ -110,7 +96,7 @@ class _AuthScreenState extends State<AuthScreen> {
                         mainAxisSize: MainAxisSize.min,
                         children: [
                           TextFormField(
-                            decoration: InputDecoration(
+                            decoration: const InputDecoration(
                               labelText: 'Email Address',
                               labelStyle: TextStyle(
                                   color: Color(
@@ -127,7 +113,7 @@ class _AuthScreenState extends State<AuthScreen> {
                               ),
                             ),
                             keyboardType: TextInputType.emailAddress,
-                            cursorColor: Color(0xFFFF5858),
+                            cursorColor: const Color(0xFFFF5858),
                             autocorrect: false,
                             textCapitalization: TextCapitalization.none,
                             validator: (value) {
@@ -144,7 +130,7 @@ class _AuthScreenState extends State<AuthScreen> {
                             },
                           ),
                           TextFormField(
-                            decoration: InputDecoration(
+                            decoration: const InputDecoration(
                               labelText: 'Password',
                               labelStyle: TextStyle(
                                   color: Color(
@@ -161,9 +147,8 @@ class _AuthScreenState extends State<AuthScreen> {
                               ),
                             ),
                             obscureText: true,
-                            cursorColor: Color(
+                            cursorColor: const Color(
                                 0xFFFF5858), // Set the color of the flashing cursor
-
                             validator: (value) {
                               if (value == null || value.trim().length < 6) {
                                 return 'Password must be at least 6 characters long.';
@@ -178,7 +163,7 @@ class _AuthScreenState extends State<AuthScreen> {
                           ElevatedButton(
                             onPressed: _submit,
                             style: ElevatedButton.styleFrom(
-                              backgroundColor: Color(0xFFFF5858),
+                              backgroundColor: const Color(0xFFFF5858),
                             ),
                             child: Text(_isLogin ? 'Login' : 'Signup',
                                 style: TextStyle(color: Colors.white)),
@@ -191,7 +176,6 @@ class _AuthScreenState extends State<AuthScreen> {
                             },
                             borderRadius: BorderRadius.circular(
                                 30.0), // Set to your desired border radius
-
                             child: TextButton(
                               onPressed: null, // or set to your logic
                               style: TextButton.styleFrom(
@@ -211,7 +195,7 @@ class _AuthScreenState extends State<AuthScreen> {
                   ),
                 ),
               ),
-              Text(
+              const Text(
                 'Or continue with',
                 style: TextStyle(
                   color: Color(0xFFBAC1CE),

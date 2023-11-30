@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
-import 'package:qismat/screens/dashboard.dart';
-import 'package:qismat/screens/profile_questions.dart';
-import 'package:qismat/screens/profile_setup.dart';
+import 'package:qismat/screens/auth/auth_navigator.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class FacebookSignInButton extends StatelessWidget {
@@ -24,33 +22,18 @@ class FacebookSignInButton extends StatelessWidget {
         final User? user = authResult.user;
 
         if (user != null) {
-          // User successfully signed in with Facebook
-          print("Facebook Sign-In Successful: ${user.displayName}");
-
-          // Check the profile setup status
-          bool isProfileSetupComplete = await checkProfileSetupStatus(user.uid);
-
-          if (isProfileSetupComplete) {
-            // Profile setup is complete, navigate to the Dashboard screen
-            Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) => DashboardScreen(),
-              ),
-            );
-          } else {
-            // Profile setup is not complete, navigate to the Profile Questions screen
-            Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) => ProfileQuestionsScreen(),
-              ),
-            );
-          }
+          // User successfully signed in with Google
+          // Navigate using AuthNavigator widget
+          Navigator.pushReplacement(
+            context,
+            MaterialPageRoute(
+              builder: (context) => AuthNavigator(),
+            ),
+          );
+        } else {
+          // Handle login failure
+          print("Facebook Sign-In Failed: ${result.message}");
         }
-      } else {
-        // Handle login failure
-        print("Facebook Sign-In Failed: ${result.message}");
       }
     } catch (error) {
       print("Facebook Sign-In Error: $error");

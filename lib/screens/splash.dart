@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'dart:async';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:qismat/screens/auth.dart';
-import 'package:qismat/screens/dashboard.dart';
+import 'package:qismat/screens/auth/auth.dart';
+import 'package:qismat/screens/auth/auth_navigator.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({Key? key}) : super(key: key);
@@ -60,8 +60,7 @@ class AuthOrDashboardScreen extends StatelessWidget {
       stream: FirebaseAuth.instance.authStateChanges(),
       builder: (ctx, snapshot) {
         if (snapshot.hasData) {
-          // User is signed in, show the dashboard or home screen
-          return const DashboardScreen();
+          return AuthNavigator();
         } else {
           // User is not signed in, show the authentication screen
           return const AuthScreen();

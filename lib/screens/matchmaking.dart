@@ -1,7 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:qismat/screens/person.dart';
-import 'package:qismat/screens/auth.dart';
+import 'package:qismat/screens/auth/auth.dart';
 
 double calculateMatchPercentage(Person user1, Person user2) {
   // Ensure both users have preferences and profiles
