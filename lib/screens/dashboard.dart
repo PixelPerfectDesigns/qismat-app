@@ -98,7 +98,8 @@ class _DashboardScreenState extends State<DashboardScreen> {
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(16.0),
                     ),
-                    tileColor: Colors.grey[50], // Light gray color
+                    tileColor: const Color.fromARGB(
+                        255, 250, 250, 250), // Light gray color
                     contentPadding: const EdgeInsets.all(16.0),
                     leading: StreamBuilder<DocumentSnapshot>(
                       stream: FirebaseFirestore.instance
