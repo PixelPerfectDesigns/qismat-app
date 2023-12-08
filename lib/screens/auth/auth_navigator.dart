@@ -25,7 +25,7 @@ class _AuthNavigatorState extends State<AuthNavigator> {
       try {
         bool isProfileSetupComplete = await checkProfileSetupStatus(user.uid);
 
-        WidgetsBinding.instance!.addPostFrameCallback((_) {
+        WidgetsBinding.instance.addPostFrameCallback((_) {
           if (isProfileSetupComplete) {
             // Profile setup is complete, navigate to the Dashboard screen
             Navigator.pushReplacement(

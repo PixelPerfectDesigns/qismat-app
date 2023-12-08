@@ -219,39 +219,5 @@
           "Independent",
           "Other"
         ]
-      }, {
-        "type": "multi_select_dropdown",
-        "question": "What skills would you like your partner to have?",
-        "field": "desiredSkills",
-        "options": [
-          "Programming",
-          "Graphic Design",
-          "Cooking",
-          "Public Speaking",
-          "Language Proficiency",
-          "Writing",
-          "Artistic Skills",
-          "Problem Solving",
-          "Leadership",
-          "Teamwork",
-          "Data Analysis",
-          "Digital Marketing",
-          "Photography",
-          "Video Editing",
-          "Mathematics",
-          "Customer Service",
-          "Research",
-          "Negotiation",
-          "Project Management",
-          "Sales",
-          "Singing",
-          "Gardening",
-          "Martial Arts",
-          "Woodworking",
-          "Craftsmanship",
-          "Event Planning",
-          "Time Management",
-          "Other"
-        ]
       }
     ]

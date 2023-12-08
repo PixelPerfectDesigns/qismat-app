@@ -43,7 +43,7 @@ class _AuthScreenState extends State<AuthScreen> {
         await userCredentials.user!.sendEmailVerification();
 
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
+          const SnackBar(
             content: Text('Verification email sent. Please check your email.'),
           ),
         );
@@ -63,7 +63,7 @@ class _AuthScreenState extends State<AuthScreen> {
         } else {
           // User's email is not verified
           ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(
+            const SnackBar(
               content: Text('Please verify your email before signing in.'),
             ),
           );
@@ -73,7 +73,7 @@ class _AuthScreenState extends State<AuthScreen> {
       if (error.code == 'email-already-in-use') {
         // Handle the case when the email is already in use
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
+          const SnackBar(
             content: Text('The email address is already in use.'),
           ),
         );
@@ -120,7 +120,7 @@ class _AuthScreenState extends State<AuthScreen> {
                         mainAxisSize: MainAxisSize.min,
                         children: [
                           TextFormField(
-                            decoration: InputDecoration(
+                            decoration: const InputDecoration(
                               labelText: 'Email Address',
                               labelStyle: TextStyle(
                                 color: Color(0xFFFF5858),
@@ -153,7 +153,7 @@ class _AuthScreenState extends State<AuthScreen> {
                             },
                           ),
                           TextFormField(
-                            decoration: InputDecoration(
+                            decoration: const InputDecoration(
                               labelText: 'Password',
                               labelStyle: TextStyle(
                                 color: Color(0xFFFF5858),
@@ -188,7 +188,7 @@ class _AuthScreenState extends State<AuthScreen> {
                               backgroundColor: const Color(0xFFFF5858),
                             ),
                             child: Text(_isLogin ? 'Login' : 'Signup',
-                                style: TextStyle(color: Colors.white)),
+                                style: const TextStyle(color: Colors.white)),
                           ),
                           InkWell(
                             onTap: () {
@@ -200,7 +200,7 @@ class _AuthScreenState extends State<AuthScreen> {
                             child: TextButton(
                               onPressed: null,
                               style: TextButton.styleFrom(
-                                foregroundColor: Color(0xFFBAC1CE),
+                                foregroundColor: const Color(0xFFBAC1CE),
                               ),
                               child: Text(
                                 _isLogin
